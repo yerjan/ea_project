@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.mum.dao.GenericDao;
-import edu.mum.dao.UserCredentialsDao;
+import edu.mum.dao.StaffCredentialsDao;
 import edu.mum.domain.StaffCredentials;
 import edu.mum.domain.StaffCredentials;
 
@@ -16,7 +16,7 @@ import edu.mum.domain.StaffCredentials;
 public class StaffCredentialsServiceImpl implements edu.mum.service.StaffCredentialsService {
 	
  	@Autowired
-	private UserCredentialsDao userCredentialsDao;
+	private StaffCredentialsDao userCredentialsDao;
 
  	
      public void save( StaffCredentials userCredentials) {  		

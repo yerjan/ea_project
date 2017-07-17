@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import edu.mum.dao.UserDao;
+import edu.mum.dao.StaffDao;
 import edu.mum.domain.Staff;
 import edu.mum.service.StaffCredentialsService;
 
@@ -15,7 +15,7 @@ import edu.mum.service.StaffCredentialsService;
 public class StaffServiceImpl implements edu.mum.service.StaffService {
 	
  	@Autowired
-	private UserDao userDao;
+	private StaffDao userDao;
 
  	@Autowired
 	private StaffCredentialsService credentialsService;

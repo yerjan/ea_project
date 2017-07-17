@@ -6,13 +6,13 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
-import edu.mum.dao.UserDao;
+import edu.mum.dao.StaffDao;
 import edu.mum.domain.Staff;
 
 
 @SuppressWarnings("unchecked")
 @Repository
-public class StaffDaoImpl extends GenericDaoImpl<Staff> implements UserDao {
+public class StaffDaoImpl extends GenericDaoImpl<Staff> implements StaffDao {
 
 	public StaffDaoImpl() {
 		super.setDaoType(Staff.class );

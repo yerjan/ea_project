@@ -6,7 +6,7 @@ import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 
-import edu.mum.dao.UserCredentialsDao;
+import edu.mum.dao.StaffCredentialsDao;
 import edu.mum.domain.StaffCredentials;
 
  
@@ -14,7 +14,7 @@ import edu.mum.domain.StaffCredentials;
 
 @SuppressWarnings("unchecked")
 @Repository
-public class StaffCredentialsDaoImpl extends GenericDaoImpl<StaffCredentials> implements UserCredentialsDao {
+public class StaffCredentialsDaoImpl extends GenericDaoImpl<StaffCredentials> implements StaffCredentialsDao {
 
 	public StaffCredentialsDaoImpl() {
 		super.setDaoType(StaffCredentials.class );
