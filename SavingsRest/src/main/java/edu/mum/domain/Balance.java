@@ -5,15 +5,19 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Entity
+@Table(name = "BALANCE")
 public class Balance implements Serializable {
 
 	@Id
@@ -28,11 +32,20 @@ public class Balance implements Serializable {
 	private BigDecimal interest;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name = "ACCOUNT_ID")
 	private Savings savings;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "VALUE_DATE", nullable = false)
-	private Double valueDate;
+	private Date valueDate;
+
+	public Date getValueDate() {
+		return valueDate;
+	}
+
+	public void setValueDate(Date valueDate) {
+		this.valueDate = valueDate;
+	}
 
 	/**
 	 * No-arg constructor for JavaBean tools

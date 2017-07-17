@@ -6,6 +6,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -14,16 +15,17 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 @Entity
 @Table(name = "TRANSACTION")
 public class Transaction implements Serializable {
 
-	public Double getTranDate() {
+	public Date getTranDate() {
 		return tranDate;
 	}
 
-	public void setTranDate(Double tranDate) {
+	public void setTranDate(Date tranDate) {
 		this.tranDate = tranDate;
 	}
 
@@ -36,6 +38,7 @@ public class Transaction implements Serializable {
 	private BigDecimal amount;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinColumn(name = "ACCOUNT_ID")
 	private Savings savings;
 
 	@Column(name = "CURRENCY", nullable = false)
@@ -49,7 +52,7 @@ public class Transaction implements Serializable {
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "TRAN_DATE", nullable = false)
-	private Double tranDate;
+	private Date tranDate;
 
 	public BigDecimal getAmount() {
 		return amount;
