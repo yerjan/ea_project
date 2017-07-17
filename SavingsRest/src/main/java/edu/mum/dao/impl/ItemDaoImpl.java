@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
 
 import edu.mum.dao.ItemDao;
 import edu.mum.domain.Item;
-import edu.mum.domain.User;
+import edu.mum.domain.Staff;
 
 
 @SuppressWarnings("unchecked")
@@ -29,7 +29,7 @@ public class ItemDaoImpl extends GenericDaoImpl<Item> implements ItemDao {
 		super.setDaoType(Item.class );
 		}
 
-	public List<Item> findBySellerOrBuyer(Integer initialPrice, User buyer, User seller) {
+	public List<Item> findBySellerOrBuyer(Integer initialPrice, Staff buyer, Staff seller) {
 		BigDecimal price = new BigDecimal(initialPrice);
 		String sellerPrice = "";
 		String buyerPrice = "";
@@ -58,7 +58,7 @@ public class ItemDaoImpl extends GenericDaoImpl<Item> implements ItemDao {
 	}
 	
 	
-	public List<Item> findItemCriteria(Integer initialPrice, User buyer, User seller) {
+	public List<Item> findItemCriteria(Integer initialPrice, Staff buyer, Staff seller) {
 	     CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
 	    // Typed query - expected results are of the type Item
 		CriteriaQuery<Item> query = criteriaBuilder.createQuery(Item.class);
@@ -82,7 +82,7 @@ public class ItemDaoImpl extends GenericDaoImpl<Item> implements ItemDao {
 	    if ((buyer != null)) {
 
 	    		// Get buyer: user.id = :buyer.id
-	    		Root<User> userRoot = query.from(User.class);
+	    		Root<Staff> userRoot = query.from(Staff.class);
 		    	Predicate buyerPredicate = criteriaBuilder.equal(userRoot.get("id"),buyer.getId());
 		    	
 		    	// get items:  item is member of user.boughtItems

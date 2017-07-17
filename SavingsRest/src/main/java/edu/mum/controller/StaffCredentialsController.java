@@ -6,19 +6,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.mum.domain.UserCredentials;
-import edu.mum.service.UserCredentialsService;
+import edu.mum.domain.StaffCredentials;
+import edu.mum.service.StaffCredentialsService;
 
 @RestController
-@RequestMapping({"/userCredentials"})
- public class UserCredentialsController {
+@RequestMapping({"/staffCredentials"})
+ public class StaffCredentialsController {
 
 	@Autowired
-	UserCredentialsService credentialsService;
+	StaffCredentialsService credentialsService;
 	
  	
  	@RequestMapping("/add")
-	public void addOne(@RequestBody UserCredentials userCredentials ) {
+	public void addOne(@RequestBody StaffCredentials userCredentials ) {
 
 		credentialsService.save(userCredentials);
  
@@ -26,9 +26,9 @@ import edu.mum.service.UserCredentialsService;
 	}
  
  	@RequestMapping("/{id}")
-	public UserCredentials findOne(@PathVariable("id") String userName ) {
+	public StaffCredentials findOne(@PathVariable("id") String userName ) {
 
-		UserCredentials validCredentials = credentialsService.findByUserName(userName);
+		StaffCredentials validCredentials = credentialsService.findByUserName(userName);
  
  		return  validCredentials;
 	}

@@ -1,8 +1,8 @@
 package edu.mum.dao;
 
-import edu.mum.domain.UserCredentials;
+import edu.mum.domain.StaffCredentials;
 
-public interface UserCredentialsDao extends GenericDao<UserCredentials> {
+public interface UserCredentialsDao extends GenericDao<StaffCredentials> {
   
-	public UserCredentials findByUserName(String userName);
+	public StaffCredentials findByUserName(String userName);
 }

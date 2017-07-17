@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.mum.dao.ItemDao;
 import edu.mum.domain.Item;
-import edu.mum.domain.User;
+import edu.mum.domain.Staff;
 import edu.mum.service.ItemService;
 
 @Service
@@ -39,7 +39,7 @@ public class ItemServiceImpl implements ItemService {
 
 
 	@Override
-	public List<Item> findBySellerOrBuyer(Integer price, User buyer, User seller) {
+	public List<Item> findBySellerOrBuyer(Integer price, Staff buyer, Staff seller) {
 		 
 		return itemDao.findBySellerOrBuyer(price, buyer, seller);
 	}
@@ -48,7 +48,7 @@ public class ItemServiceImpl implements ItemService {
 		return itemDao.findByCategoryName(categoryName);
 	}
 	
-	public List<Item> findItemCriteria(Integer initialPrice, User buyer, User seller) {
+	public List<Item> findItemCriteria(Integer initialPrice, Staff buyer, Staff seller) {
 		return itemDao.findItemCriteria(initialPrice,buyer,seller);
 	}
 }

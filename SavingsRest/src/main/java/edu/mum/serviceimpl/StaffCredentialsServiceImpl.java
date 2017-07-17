@@ -8,33 +8,33 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.mum.dao.GenericDao;
 import edu.mum.dao.UserCredentialsDao;
-import edu.mum.domain.UserCredentials;
-import edu.mum.domain.UserCredentials;
+import edu.mum.domain.StaffCredentials;
+import edu.mum.domain.StaffCredentials;
 
 @Service
 @Transactional 
-public class UserCredentialsServiceImpl implements edu.mum.service.UserCredentialsService {
+public class StaffCredentialsServiceImpl implements edu.mum.service.StaffCredentialsService {
 	
  	@Autowired
 	private UserCredentialsDao userCredentialsDao;
 
  	
-     public void save( UserCredentials userCredentials) {  		
+     public void save( StaffCredentials userCredentials) {  		
   		userCredentialsDao.save(userCredentials);
  	}
   	
   	
-	public List<UserCredentials> findAll() {
-		return (List<UserCredentials>)userCredentialsDao.findAll();
+	public List<StaffCredentials> findAll() {
+		return (List<StaffCredentials>)userCredentialsDao.findAll();
 	}
 
-	public UserCredentials findByUserName(String userName) {
+	public StaffCredentials findByUserName(String userName) {
 		return userCredentialsDao.findByUserName(userName);
 	}
 
 
 	@Override
-	public UserCredentials update(UserCredentials userCredentials) {
+	public StaffCredentials update(StaffCredentials userCredentials) {
 		return userCredentialsDao.update(userCredentials);
 	
 	}

@@ -7,46 +7,46 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.mum.dao.UserDao;
-import edu.mum.domain.User;
-import edu.mum.service.UserCredentialsService;
+import edu.mum.domain.Staff;
+import edu.mum.service.StaffCredentialsService;
 
 @Service
 @Transactional 
-public class UserServiceImpl implements edu.mum.service.UserService {
+public class StaffServiceImpl implements edu.mum.service.StaffService {
 	
  	@Autowired
 	private UserDao userDao;
 
  	@Autowired
-	private UserCredentialsService credentialsService;
+	private StaffCredentialsService credentialsService;
 
  	
-     public void save( User user) {  		
+     public void save( Staff user) {  		
   		userDao.save(user);
  	}
   	
      @Override
-    	public void saveFull( User user) {  		
+    	public void saveFull( Staff user) {  		
    		credentialsService.save(user.getUserCredentials());
    		userDao.save(user);
  	}
    	
 	
-	public List<User> findAll() {
-		return (List<User>)userDao.findAll();
+	public List<Staff> findAll() {
+		return (List<Staff>)userDao.findAll();
 	}
 
-	public User findByEmail(String email) {
+	public Staff findByEmail(String email) {
 		return userDao.findByEmail(email);
 	}
 	
-	public User update(User user) {
+	public Staff update(Staff user) {
 		 return userDao.update(user);
 
 	}
 
 	@Override
-	public User findOne(Long id) {
+	public Staff findOne(Long id) {
 		 
 		return userDao.findOne(id);
 	}

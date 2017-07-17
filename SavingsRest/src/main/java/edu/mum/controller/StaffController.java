@@ -15,28 +15,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import edu.mum.domain.User;
-import edu.mum.service.UserService;
+import edu.mum.domain.Staff;
+import edu.mum.service.StaffService;
 
 @RestController
-@RequestMapping({"/users"})
-public class UserController {
+@RequestMapping({"/Staffs"})
+public class StaffController {
 	
 	@Autowired
-	private UserService  userService;
+	private StaffService  userService;
 
 	@RequestMapping
-	public List<User>  listUsers(Model model) {
+	public List<Staff>  listUsers(Model model) {
 		return userService.findAll();
 	}
 	
   	@RequestMapping("/{id}")
-	public User getUserById(@PathVariable("id") Long id) {
+	public Staff getUserById(@PathVariable("id") Long id) {
 		return userService.findOne(id);
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public User processAddNewUserForm(@RequestBody User userToBeAdded) {
+	public Staff processAddNewUserForm(@RequestBody Staff userToBeAdded) {
 			userService.save(userToBeAdded);
 
 	   	return null;

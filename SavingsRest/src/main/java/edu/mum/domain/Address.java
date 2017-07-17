@@ -19,7 +19,7 @@ import java.io.Serializable;
  * it is a component. Of course, other entity classes can also
  * embed addresses.
  *
- * @see User
+ * @see Staff
  * @author Christian Bauer
  */
 @Entity
@@ -40,7 +40,7 @@ public class Address implements Serializable {
 	private String city;
 
   	@ManyToOne(fetch=FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-  	private User  user;
+  	private Staff  user;
 
 	/**
 	 * No-arg constructor for JavaBean tools
@@ -104,11 +104,11 @@ public class Address implements Serializable {
 		this.id = id;
 	}
 
-	public User getUser() {
+	public Staff getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Staff user) {
 		this.user = user;
 	}
 

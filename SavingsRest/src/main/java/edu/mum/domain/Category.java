@@ -32,7 +32,7 @@ public class Category implements Serializable {
     private Category parentCategory;
  
      @Transient
-    private Map<Item,User> itemsAndUser = new HashMap<Item,User>();
+    private Map<Item,Staff> itemsAndUser = new HashMap<Item,Staff>();
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name="CREATED", nullable = false, updatable = false)
