@@ -14,9 +14,9 @@ import edu.mum.domain.StaffCredentials;
 
 @SuppressWarnings("unchecked")
 @Repository
-public class UserCredentialsDaoImpl extends GenericDaoImpl<StaffCredentials> implements UserCredentialsDao {
+public class StaffCredentialsDaoImpl extends GenericDaoImpl<StaffCredentials> implements UserCredentialsDao {
 
-	public UserCredentialsDaoImpl() {
+	public StaffCredentialsDaoImpl() {
 		super.setDaoType(StaffCredentials.class );
 		}
 

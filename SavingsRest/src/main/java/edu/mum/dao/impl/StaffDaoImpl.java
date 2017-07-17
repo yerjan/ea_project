@@ -12,15 +12,15 @@ import edu.mum.domain.Staff;
 
 @SuppressWarnings("unchecked")
 @Repository
-public class UserDaoImpl extends GenericDaoImpl<Staff> implements UserDao {
+public class StaffDaoImpl extends GenericDaoImpl<Staff> implements UserDao {
 
-	public UserDaoImpl() {
+	public StaffDaoImpl() {
 		super.setDaoType(Staff.class );
 		}
 
 	public Staff findByEmail(String email) {
 	     
-		Query query = entityManager.createQuery("select u from User u  where u.email =:email");
+		Query query = entityManager.createQuery("select u from Staff u  where u.email =:email");
 		return (Staff) query.setParameter("email", email).getSingleResult();
 			     
 
