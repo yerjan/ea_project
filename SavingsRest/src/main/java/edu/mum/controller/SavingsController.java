@@ -90,7 +90,7 @@ public class SavingsController {
 
 	}
 
-	@RequestMapping(value = "/close", method = RequestMethod.POST)
+	@RequestMapping(value = "/open", method = RequestMethod.POST)
 	public Savings processOpen(@RequestBody Savings savings) {
 		Savings s = null;
 		try {
