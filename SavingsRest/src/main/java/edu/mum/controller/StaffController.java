@@ -38,9 +38,7 @@ public class StaffController {
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public Staff processAddNewUserForm(@RequestBody Staff userToBeAdded) {
 			userService.save(userToBeAdded);
-
 	   	return null;
- 
 	}
 	
  
