@@ -41,7 +41,7 @@ public class Savings implements Serializable {
 	private String name;
 
 	@Column(name = "STATUS", nullable = false)
-	private String status;
+	private String status = "NEW";
 
 	@Column(name = "CURRENCY", nullable = false)
 	private String currency;

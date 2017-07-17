@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import edu.mum.domain.Savings;
+import edu.mum.domain.Transaction;
 
 public interface SavingsService {
 
@@ -15,8 +16,11 @@ public interface SavingsService {
 
 	public Savings update(Savings user);
 
-	public Savings incrementBalance(Long id, BigDecimal pAmount, String pDesc);
+	public Savings incrementBalance(Transaction tran);
 
-	public Savings decrementBalance(Long id, BigDecimal pAmount, String pDesc);
+	public Savings decrementBalance(Transaction tran);
 
+	public Savings openSavings(Long id);
+
+	public Savings closeSavings(Long id);
 }

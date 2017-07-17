@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.CascadeType;
@@ -15,7 +16,16 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 @Entity
+@Table(name = "TRANSACTION")
 public class Transaction implements Serializable {
+
+	public Double getTranDate() {
+		return tranDate;
+	}
+
+	public void setTranDate(Double tranDate) {
+		this.tranDate = tranDate;
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
