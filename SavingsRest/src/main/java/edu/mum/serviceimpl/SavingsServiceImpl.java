@@ -1,5 +1,6 @@
 package edu.mum.serviceimpl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,12 +59,37 @@ public class SavingsServiceImpl implements SavingsService {
 		SysConfig sysConfig = sysConfigDao.getSysConfig();
 		tran.setTranDate(sysConfig.getSysDate());
 
-		Balance b = balanceDao.findByAccount(tran.getSavings().getId());
-		b.setPrincipal(b.getPrincipal().add(tran.getAmount()));
-		if (b.getValueDate().compareTo(sysConfig.getSysDate()) == 0)
-			balanceDao.update(b);
-		else
+		Balance b = balanceDao.findActiveBalance(tran.getSavings().getId());
+
+		if (b == null) {
+			// balanceDao.updateBalanceStatus(s.getId());
+
+			Balance b1 = new Balance();
+			b1.setInterest(new BigDecimal(0));
+			b1.setPrincipal(tran.getAmount());
+			b1.setSavings(s);
+			b1.setStatus(0);
+			b1.setValueDate(sysConfig.getSysDate());
 			balanceDao.save(b);
+
+		} else {
+			if (sysConfig.getSysDate().compareTo(b.getValueDate()) != 0) {
+				b.setStatus(1);
+
+				Balance b1 = new Balance();
+				b1.setInterest(new BigDecimal(0));
+				b1.setPrincipal(tran.getAmount());
+				b1.setSavings(s);
+				b1.setStatus(0);
+				b1.setValueDate(sysConfig.getSysDate());
+				balanceDao.save(b);
+
+			} else {
+				b.setPrincipal(b.getPrincipal().add(tran.getAmount()));
+				b.setValueDate(sysConfig.getSysDate());
+				balanceDao.update(b);
+			}
+		}
 
 		tran.setCurrency(s.getCurrency());
 		tran.setType("INCR");
@@ -79,14 +105,37 @@ public class SavingsServiceImpl implements SavingsService {
 
 		SysConfig sysConfig = sysConfigDao.getSysConfig();
 		tran.setTranDate(sysConfig.getSysDate());
+		Balance b = balanceDao.findActiveBalance(tran.getSavings().getId());
 
-		Balance b = balanceDao.findByAccount(tran.getSavings().getId());
-		b.setPrincipal(b.getPrincipal().subtract(tran.getAmount()));
+		if (b == null) {
+			// balanceDao.updateBalanceStatus(s.getId());
 
-		if (b.getValueDate().compareTo(sysConfig.getSysDate()) == 0)
-			balanceDao.update(b);
-		else
+			Balance b1 = new Balance();
+			b1.setInterest(new BigDecimal(0));
+			b1.setPrincipal(tran.getAmount());
+			b1.setSavings(s);
+			b1.setStatus(0);
+			b1.setValueDate(sysConfig.getSysDate());
 			balanceDao.save(b);
+
+		} else {
+			if (sysConfig.getSysDate().compareTo(b.getValueDate()) != 0) {
+				b.setStatus(1);
+
+				Balance b1 = new Balance();
+				b1.setInterest(new BigDecimal(0));
+				b1.setPrincipal(tran.getAmount());
+				b1.setSavings(s);
+				b1.setStatus(0);
+				b1.setValueDate(sysConfig.getSysDate());
+				balanceDao.save(b);
+
+			} else {
+				b.setPrincipal(b.getPrincipal().subtract(tran.getAmount()));
+				b.setValueDate(sysConfig.getSysDate());
+				balanceDao.update(b);
+			}
+		}
 
 		tran.setCurrency(s.getCurrency());
 		tran.setType("DECR");

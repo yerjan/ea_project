@@ -105,4 +105,19 @@ public class SavingsController {
 
 	}
 
+	@RequestMapping(value = "/", method = RequestMethod.POST)
+	public Savings listSavingsByAccount(@RequestBody Savings savings) {
+		Savings s = null;
+		try {
+			s = savingsService.openSavings(savings.getId());
+
+		} catch (Exception up) {
+			System.out.println("Open transaction Failed!!!");
+
+		}
+
+		return s;
+
+	}
+
 }

@@ -17,7 +17,7 @@ public class TransactionDaoImpl extends GenericDaoImpl<Transaction> implements T
 		super.setDaoType(Transaction.class);
 	}
 
-	public Transaction findByAccount(Long accountId) {
+	public Transaction listSavingsByAccount(Long accountId) {
 
 		Query query = entityManager.createQuery("select u from Transaction u  where u.savings.accountId =:accountId");
 		return (Transaction) query.setParameter("accountId", accountId).getSingleResult();
