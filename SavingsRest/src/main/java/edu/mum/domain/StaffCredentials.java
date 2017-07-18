@@ -15,7 +15,7 @@ import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-@Entity(name = "Authentication")
+@Entity(name = "AUTHENTICATION") // Authentication
 public class StaffCredentials {
 
 	@Id

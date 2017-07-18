@@ -1,6 +1,7 @@
 package edu.mum.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -41,7 +42,7 @@ public class Savings implements Serializable {
 	private String name;
 
 	@Column(name = "STATUS", nullable = false)
-	private String status;
+	private String status = "NEW";
 
 	@Column(name = "CURRENCY", nullable = false)
 	private String currency;
@@ -51,11 +52,55 @@ public class Savings implements Serializable {
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "START_DATE", nullable = false)
-	private Double startDate;
+	private Date startDate;
+
+	public Double getInterestRate() {
+		return interestRate;
+	}
+
+	public void setInterestRate(Double interestRate) {
+		this.interestRate = interestRate;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
+	}
+
+	public Date getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	public Long getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
+
+	public Set<Transaction> getTransactions() {
+		return transactions;
+	}
+
+	public void setTransactions(Set<Transaction> transactions) {
+		this.transactions = transactions;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 
 	@Future
 	@Column(name = "END_DATE", nullable = false)
-	private Double endDate;
+	private Date endDate;
 
 	@Column(name = "CUSTOMER_ID", nullable = false)
 	private Long customerId;
