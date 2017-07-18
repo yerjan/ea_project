@@ -10,7 +10,7 @@ import edu.mum.domain.StaffCredentials;
 import edu.mum.service.StaffCredentialsService;
 
 @RestController
-@RequestMapping({"/userCredentials"})
+@RequestMapping({"/staffCredentials"})
  public class StaffCredentialsController {
 
 	@Autowired
@@ -18,9 +18,9 @@ import edu.mum.service.StaffCredentialsService;
 	
  	
  	@RequestMapping("/add")
-	public void addOne(@RequestBody StaffCredentials userCredentials ) {
+	public void addOne(@RequestBody StaffCredentials staffCredentials ) {
 
-		credentialsService.save(userCredentials);
+		credentialsService.save(staffCredentials);
  
  		return  ;
 	}
