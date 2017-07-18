@@ -19,22 +19,23 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 public class StaffCredentials {
 
 	@Id
-	@Column(name = "USER", nullable = false, unique = true, length = 127)
+	@Column(name = "USER_NAME", nullable = false, unique = true, length = 127)
 	String userName;
 	@Column(name = "PASSWORD", nullable = false, length = 32)
 	String password;
-	@Column(nullable = true, length = 32)
+	@Column(name = "VERIFY_PASSWORD", nullable = true, length = 32)
 	String verifyPassword;
+	@Column(name = "ENABLED")
 	Boolean enabled;
 
 	@OneToOne(mappedBy = "userCredentials", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JsonManagedReference
+	// @JsonManagedReference
 	private Staff user;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "credential_authority", joinColumns = {
-			@JoinColumn(name = "credential_id") }, inverseJoinColumns = {
-					@JoinColumn(name = "authority_id", unique = true) })
+	@JoinTable(name = "CREDENTIAL_AUTHORITY", joinColumns = {
+			@JoinColumn(name = "CREDENTIAL_ID") }, inverseJoinColumns = {
+					@JoinColumn(name = "AUTHORITY_ID", unique = true) })
 	List<Authority> authority = new ArrayList<Authority>();
 
 	public String getUserName() {

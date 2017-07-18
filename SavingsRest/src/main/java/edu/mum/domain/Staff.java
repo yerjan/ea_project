@@ -8,19 +8,10 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Version;
 
 @Entity
 @Table(name = "STAFF")
 public class Staff extends Person implements Serializable {
-
-	// @Id
-	// @GeneratedValue(strategy = GenerationType.AUTO)
-	// @Column(name = "USER_ID")
-	// private Long id = null;
-
-	@Version
-	private int version = 0;
 
 	@Column(name = "RANK", nullable = true)
 	private int ranking = 0;
@@ -29,7 +20,7 @@ public class Staff extends Person implements Serializable {
 	private boolean admin = false;
 
 	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "userId")
+	@JoinColumn(name = "USER_NAME")
 	// @JsonBackReference
 	private StaffCredentials userCredentials;
 
