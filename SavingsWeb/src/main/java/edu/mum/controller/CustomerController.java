@@ -29,10 +29,10 @@ public class CustomerController {
 	
   	@RequestMapping("/{id}")
 	public String getUserById(@PathVariable("id") Long id,Model model) {
-		Customer user = customerService.findOne(id);
-		model.addAttribute("user", user);
+		//Customer user = customerService.findOne(id);
+		//model.addAttribute("user", user);
 
- 		return "user";
+ 		return "customer";
 	}	
  
 }

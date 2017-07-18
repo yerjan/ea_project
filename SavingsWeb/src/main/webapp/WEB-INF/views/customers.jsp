@@ -27,7 +27,7 @@
 			<tbody>
 				<tr>
 					<th>1</th> 
-					<td><a href="view2.html">Otto Mark</a> </td>
+					<td><a href="/customers/1">Otto Mark</a> </td>
 					<td>john_wick@love.dog</td>
 					<td>Active User</td>
 					<td>700</td>
