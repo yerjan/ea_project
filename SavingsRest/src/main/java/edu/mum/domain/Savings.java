@@ -106,7 +106,7 @@ public class Savings implements Serializable {
 	@JsonIgnore
 	private Set<Balance> balances = new HashSet<Balance>();
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "savings")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "savings")
 	@JsonIgnore
 	private Set<Transaction> transactions = new HashSet<Transaction>();
 
