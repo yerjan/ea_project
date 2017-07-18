@@ -25,9 +25,10 @@ public class CustomerController {
 
 	@RequestMapping({"", "/all"})
 	public String listUsers(Model model) {
+		
 		List<Customer> customers = customerService.findAll();
 		model.addAttribute("customer", customers);
-		
+		//public string ret(ar1,)
 		return "customers";
 	}
 	
@@ -35,8 +36,17 @@ public class CustomerController {
 	public String getUserById(@PathVariable("id") Long id,Model model) {
 		Customer customer = customerService.findOne(id);
 		model.addAttribute("customer", customer);
-
  		return "customer";
 	}
- 
+// pagination  	
+@RequestMapping("/{startIndex}-{size}")
+	public String findCustemers(@PathVariable("startIndex") int startIndex,@PathVariable("size") int size, Model model) {
+
+	List<Customer> customers = customerService.findCustemers(startIndex, size);
+	
+       model.addAttribute("customer", customers);
+	
+	return "customers";
+	}
+
 }

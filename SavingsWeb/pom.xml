@@ -5,6 +5,7 @@
   <version>0.0.1-SNAPSHOT</version>
  <dependencyManagement>
  <dependencies>
+
   
          <dependency>
             <groupId>org.springframework</groupId>
@@ -58,6 +59,18 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
          </dependency>
+         <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+ 		</dependency>
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjrt</artifactId>
+ 		</dependency>
+		<dependency>
+		    <groupId>org.aspectj</groupId>
+		    <artifactId>aspectjweaver</artifactId>
+ 		</dependency>
      	<dependency>
   		<groupId>org.hibernate</groupId>
   		<artifactId>hibernate-entitymanager</artifactId>

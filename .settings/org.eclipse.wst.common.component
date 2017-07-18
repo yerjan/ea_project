@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="ea_project">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/SavingsRest/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/SavingsWeb/src/main/java"/>
+        <property name="context-root" value="ea_project"/>
+        <property name="java-output-path" value="/ea_project/bin"/>
+    </wb-module>
+</project-modules>
