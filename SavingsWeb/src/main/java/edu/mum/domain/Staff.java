@@ -9,6 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "STAFF")
 public class Staff extends Person implements Serializable {
@@ -21,7 +23,7 @@ public class Staff extends Person implements Serializable {
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "USER_NAME")
-	// @JsonBackReference
+	@JsonBackReference
 	private StaffCredentials userCredentials;
 
 	public int getRanking() {

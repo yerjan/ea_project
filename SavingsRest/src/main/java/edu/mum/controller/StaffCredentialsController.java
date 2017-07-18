@@ -27,9 +27,10 @@ import edu.mum.service.StaffCredentialsService;
  
  	@RequestMapping("/{id}")
 	public StaffCredentials findOne(@PathVariable("id") String userName ) {
-
+ 		System.out.println("findOne: 2");
+ 		System.out.println("findOne: 2 userName: " + userName);
 		StaffCredentials validCredentials = credentialsService.findByUserName(userName);
- 
+		System.out.println("findOne: 3");
  		return  validCredentials;
 	}
  
