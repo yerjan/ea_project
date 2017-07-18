@@ -1,12 +1,14 @@
  
-INSERT INTO Authentication(user,password,enabled) VALUES ('guest','guest', TRUE);
-INSERT INTO Authentication(user,password,enabled) VALUES ('admin','admin', TRUE);
+INSERT INTO AUTHENTICATION(USER_NAME,PASSWORD,ENABLED) VALUES ('guest','guest', TRUE);
+INSERT INTO AUTHENTICATION(USER_NAME,PASSWORD,ENABLED) VALUES ('admin','admin', TRUE);
  
-INSERT INTO authority (username, authority) VALUES ('guest', 'ROLE_USER');
-INSERT INTO authority (username, authority) VALUES ('admin', 'ROLE_ADMIN');
-INSERT INTO authority (username, authority) VALUES ('admin', 'ROLE_USER');
+INSERT INTO AUTHORITY (USER_NAME, AUTHORITY) VALUES ('guest', 'ROLE_USER');
+INSERT INTO AUTHORITY (USER_NAME, AUTHORITY) VALUES ('admin', 'ROLE_ADMIN');
+INSERT INTO AUTHORITY (USER_NAME, AUTHORITY) VALUES ('admin', 'ROLE_USER');
 
-INSERT INTO  `USERS` (firstname, lastname,email, version, is_admin,rank, userid) VALUES ('Curious','George','george@curious.com',0,0,0,'admin');
-INSERT INTO `USERS` (firstname, lastname,email,version,is_admin,rank,userid) VALUES ('Allen','Rench','allen@wrench.com',0,0,0,'guest');
+INSERT INTO  PERSON (PERSON_ID, firstname, lastname,email) VALUES (1, 'Curious','George','george@curious.com');
+INSERT INTO PERSON (PERSON_ID, firstname, lastname,email) VALUES (2, 'Allen','Rench','allen@wrench.com');
 
 					
+INSERT INTO  STAFF (PERSON_ID, is_admin,rank, USER_NAME) VALUES (1,0,0,'admin');
+INSERT INTO STAFF (PERSON_ID,is_admin,rank,USER_NAME) VALUES (2, 0,0,'guest');
