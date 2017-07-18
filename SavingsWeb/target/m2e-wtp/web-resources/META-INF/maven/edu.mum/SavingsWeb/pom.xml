@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>edu.mum</groupId>
-  <artifactId>Lab_12_RestService</artifactId>
+  <artifactId>SavingsWeb</artifactId>
   <version>0.0.1-SNAPSHOT</version>
  <dependencyManagement>
  <dependencies>
@@ -40,20 +40,11 @@
   		<scope>provided</scope>
   	</dependency>
 
-   	<dependency>
-  		<groupId>commons-fileupload</groupId>
-  		<artifactId>commons-fileupload</artifactId>
-  	</dependency>
-<!--  	<dependency>
+ 
+ 	<dependency>
   		<groupId>org.codehaus.jackson</groupId>
   		<artifactId>jackson-mapper-asl</artifactId>
   	</dependency>
- --> 
-        <dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.4.4</version>
-		</dependency>
  
           <dependency>
             <groupId>org.springframework</groupId>
@@ -67,35 +58,22 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
          </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-orm</artifactId>
-          </dependency>
- 
-   
-  
-  
- <!--  
-     <dependency>
-  		<groupId>org.hibernate.javax.persistence</groupId>
-  		<artifactId>hibernate-jpa-2.1-api</artifactId>
-  		<version>1.0.0.Final</version>
-  	</dependency>
- -->
-   	<dependency>
+     	<dependency>
   		<groupId>org.hibernate</groupId>
   		<artifactId>hibernate-entitymanager</artifactId>
    	</dependency>
-  	  	<dependency>
-  		<groupId>cglib</groupId>
-  		<artifactId>cglib-nodep</artifactId>
-  		<version>2.2.2</version>
-  	</dependency>
-
-  	<dependency>
-  		<groupId>mysql</groupId>
-  		<artifactId>mysql-connector-java</artifactId>
-  		</dependency>
+ 
+ 
+          <dependency>
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-base</artifactId>
+			<version>2.4.4</version>
+		</dependency>
+         
+         <dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+ 		</dependency>
 
 <dependency>
     <groupId>org.hibernate</groupId>
