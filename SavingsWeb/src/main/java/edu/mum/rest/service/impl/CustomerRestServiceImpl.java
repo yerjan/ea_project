@@ -22,12 +22,12 @@ public class CustomerRestServiceImpl implements CustomerRestService {
 	public List<Customer> findAll() {
 		
 		RestTemplate restTemplate = remoteApi.getRestTemplate();
-		return Arrays.asList(restTemplate.exchange("http://localhost:8080/SavingRest/customers/", HttpMethod.GET, remoteApi.getHttpEntity(), Customer[].class).getBody());
+		return Arrays.asList(restTemplate.exchange("http://localhost:8080/SavingsRest/customers/", HttpMethod.GET, remoteApi.getHttpEntity(), Customer[].class).getBody());
  	}
 
 	public Customer findOne(Long index) {
 		RestTemplate restTemplate = remoteApi.getRestTemplate();
- 		return (restTemplate.exchange("http://localhost:8080/SavingRest/customers/"+ index, HttpMethod.GET, remoteApi.getHttpEntity(), Customer.class).getBody());
+ 		return (restTemplate.exchange("http://localhost:8080/SavingsRest/customers/"+ index, HttpMethod.GET, remoteApi.getHttpEntity(), Customer.class).getBody());
 	}
 
 //	public Customer save(Customer member) {

@@ -9,4 +9,5 @@ INSERT INTO authority (username, authority) VALUES ('admin', 'ROLE_USER');
 INSERT INTO  `USERS` (firstname, lastname,email, version, is_admin,rank, userid) VALUES ('Curious','George','george@curious.com',0,0,0,'admin');
 INSERT INTO `USERS` (firstname, lastname,email,version,is_admin,rank,userid) VALUES ('Allen','Rench','allen@wrench.com',0,0,0,'guest');
 
-					
+INSERT INTO `customer` (`creditScore`, `status`, `PERSON_ID`) VALUES ('700', 'Active', '1');
+INSERT INTO `customer` (`creditScore`, `status`, `PERSON_ID`) VALUES ('600', 'active', '2');

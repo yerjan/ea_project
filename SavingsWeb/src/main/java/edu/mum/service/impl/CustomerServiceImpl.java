@@ -15,7 +15,7 @@ import edu.mum.service.UserCredentialsService;
 public class CustomerServiceImpl implements edu.mum.service.CustomerService {
 	
 	@Autowired
-	private CustomerRestService userRestService;
+	private CustomerRestService customerRestService;
 
  	@Autowired
 	private UserCredentialsService credentialsService;
@@ -33,13 +33,13 @@ public class CustomerServiceImpl implements edu.mum.service.CustomerService {
    	
 	
 	public List<Customer> findAll() {
-		return (List<Customer>)userRestService.findAll();
+		return (List<Customer>)customerRestService.findAll();
 	}
 
  	@Override
 	public Customer findOne(Long id) {
 		 
-		return userRestService.findOne(id);
+		return customerRestService.findOne(id);
 	}
  
 

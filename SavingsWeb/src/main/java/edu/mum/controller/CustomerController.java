@@ -1,5 +1,7 @@
 package edu.mum.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,16 +25,18 @@ public class CustomerController {
 
 	@RequestMapping({"", "/all"})
 	public String listUsers(Model model) {
-		//model.addAttribute("customer", customerService.findAll());
+		List<Customer> customers = customerService.findAll();
+		model.addAttribute("customer", customers);
+		
 		return "customers";
 	}
 	
   	@RequestMapping("/{id}")
 	public String getUserById(@PathVariable("id") Long id,Model model) {
-		//Customer user = customerService.findOne(id);
-		//model.addAttribute("user", user);
+		Customer customer = customerService.findOne(id);
+		model.addAttribute("customer", customer);
 
  		return "customer";
-	}	
+	}
  
 }
