@@ -43,6 +43,17 @@ public class Balance implements Serializable {
 	@Column(name = "VALUE_DATE", nullable = false)
 	private Date valueDate;
 
+	@Column(name = "STATUS")
+	private int status;
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 	public Date getValueDate() {
 		return valueDate;
 	}

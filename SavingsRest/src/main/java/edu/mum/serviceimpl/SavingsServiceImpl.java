@@ -1,5 +1,6 @@
 package edu.mum.serviceimpl;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,12 +59,23 @@ public class SavingsServiceImpl implements SavingsService {
 		SysConfig sysConfig = sysConfigDao.getSysConfig();
 		tran.setTranDate(sysConfig.getSysDate());
 
-		Balance b = balanceDao.findByAccount(tran.getSavings().getId());
-		b.setPrincipal(b.getPrincipal().add(tran.getAmount()));
-		if (b.getValueDate().compareTo(sysConfig.getSysDate()) == 0)
-			balanceDao.update(b);
-		else
+		Balance b = balanceDao.findActiveBalance(tran.getSavings().getId());
+		if (b == null || sysConfig.getSysDate().compareTo(b.getValueDate()) != 0) {
+			balanceDao.updateBalanceStatus(s.getId());
+
+			b = new Balance();
+			b.setInterest(new BigDecimal(0));
+			b.setPrincipal(tran.getAmount());
+			b.setSavings(s);
+			b.setStatus(0);
+			b.setValueDate(sysConfig.getSysDate());
 			balanceDao.save(b);
+
+		} else {
+			b.setPrincipal(b.getPrincipal().add(tran.getAmount()));
+			b.setValueDate(sysConfig.getSysDate());
+			balanceDao.update(b);
+		}
 
 		tran.setCurrency(s.getCurrency());
 		tran.setType("INCR");
@@ -80,13 +92,23 @@ public class SavingsServiceImpl implements SavingsService {
 		SysConfig sysConfig = sysConfigDao.getSysConfig();
 		tran.setTranDate(sysConfig.getSysDate());
 
-		Balance b = balanceDao.findByAccount(tran.getSavings().getId());
-		b.setPrincipal(b.getPrincipal().subtract(tran.getAmount()));
+		Balance b = balanceDao.findActiveBalance(tran.getSavings().getId());
+		if (b == null || sysConfig.getSysDate().compareTo(b.getValueDate()) != 0) {
+			balanceDao.updateBalanceStatus(s.getId());
 
-		if (b.getValueDate().compareTo(sysConfig.getSysDate()) == 0)
-			balanceDao.update(b);
-		else
+			b = new Balance();
+			b.setInterest(new BigDecimal(0));
+			b.setPrincipal(tran.getAmount());
+			b.setSavings(s);
+			b.setStatus(0);
+			b.setValueDate(sysConfig.getSysDate());
 			balanceDao.save(b);
+
+		} else {
+			b.setPrincipal(b.getPrincipal().subtract(tran.getAmount()));
+			b.setValueDate(sysConfig.getSysDate());
+			balanceDao.update(b);
+		}
 
 		tran.setCurrency(s.getCurrency());
 		tran.setType("DECR");
