@@ -1,12 +1,11 @@
 package edu.mum.dao.impl;
 
+import java.util.List;
+
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
-
-import edu.mum.dao.SavingsDao;
 import edu.mum.dao.TransactionDao;
-import edu.mum.domain.Savings;
 import edu.mum.domain.Transaction;
 
 @SuppressWarnings("unchecked")
@@ -17,10 +16,11 @@ public class TransactionDaoImpl extends GenericDaoImpl<Transaction> implements T
 		super.setDaoType(Transaction.class);
 	}
 
-	public Transaction listSavingsByAccount(Long accountId) {
+	@Override
+	public List<Transaction> listTranByAccount(Long accountId) {
 
 		Query query = entityManager.createQuery("select u from Transaction u  where u.savings.accountId =:accountId");
-		return (Transaction) query.setParameter("accountId", accountId).getSingleResult();
+		return (List<Transaction>) query.setParameter("accountId", accountId).getResultList();
 
 	}
 

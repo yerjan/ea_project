@@ -1,12 +1,14 @@
 package edu.mum.dao.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 import edu.mum.dao.BalanceDao;
 import edu.mum.domain.Balance;
+import edu.mum.domain.Transaction;
 
 @SuppressWarnings("unchecked")
 @Repository

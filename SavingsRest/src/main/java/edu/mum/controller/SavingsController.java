@@ -1,6 +1,7 @@
 package edu.mum.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.mum.domain.Savings;
@@ -22,8 +24,12 @@ public class SavingsController {
 	private SavingsService savingsService;
 
 	@RequestMapping
-	public List<Savings> listSavings(Model model) {
-		return savingsService.findAll();
+	public List<Savings> listSavings(Model model, @RequestParam(value = "customerId", required = false) Long id) {
+		if (id != null) {
+			return savingsService.findByCustomer(id);
+		} else {
+			return savingsService.findAll();
+		}
 	}
 
 	@RequestMapping("/{id}")
@@ -105,14 +111,23 @@ public class SavingsController {
 
 	}
 
-	@RequestMapping(value = "/", method = RequestMethod.POST)
-	public Savings listSavingsByAccount(@RequestBody Savings savings) {
-		Savings s = null;
+	// www.something.com/customers/
+	// www.something.com/customers?age=5
+	// www.something.com/customers/5
+
+	// www.something.com/savings?customerId=5
+	// www.something.com/savings/5
+
+	// www.something.com//
+
+	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
+	public Transaction listTranByAccount(@PathVariable("id") Long id) {
+		Transaction s = null;
 		try {
-			s = savingsService.openSavings(savings.getId());
+			// s = savingsService
 
 		} catch (Exception up) {
-			System.out.println("Open transaction Failed!!!");
+			System.out.println("listTranByAccount transaction Failed!!!");
 
 		}
 
