@@ -82,7 +82,7 @@ public class SavingsServiceImpl implements SavingsService {
 
 		Balance b = balanceDao.findByAccount(tran.getSavings().getId());
 		b.setPrincipal(b.getPrincipal().subtract(tran.getAmount()));
-		// balanceDao.update(b);
+
 		if (b.getValueDate().compareTo(sysConfig.getSysDate()) == 0)
 			balanceDao.update(b);
 		else
