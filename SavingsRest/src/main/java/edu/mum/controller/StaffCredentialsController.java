@@ -10,7 +10,7 @@ import edu.mum.domain.StaffCredentials;
 import edu.mum.service.StaffCredentialsService;
 
 @RestController
-@RequestMapping({"/staffCredentials"})
+@RequestMapping({"/userCredentials"})
  public class StaffCredentialsController {
 
 	@Autowired

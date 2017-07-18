@@ -22,7 +22,7 @@ public class StaffCredentialsDaoImpl extends GenericDaoImpl<StaffCredentials> im
 
 	public StaffCredentials findByUserName(String userName) {
 
-		Query query = entityManager.createQuery("select m from Authentication m  where m.userName =:userName");
+		Query query = entityManager.createQuery("select m from AUTHENTICATION m  where m.userName =:userName");
 		return (StaffCredentials) query.setParameter("userName", userName).getSingleResult();
 
 	}

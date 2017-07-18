@@ -7,23 +7,23 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import edu.mum.dao.UserCredentialsDao;
-import edu.mum.domain.UserCredentials;
+import edu.mum.domain.StaffCredentials;
 
  
 
 
 @SuppressWarnings("unchecked")
 @Repository
-public class UserCredentialsDaoImpl extends GenericDaoImpl<UserCredentials> implements UserCredentialsDao {
+public class UserCredentialsDaoImpl extends GenericDaoImpl<StaffCredentials> implements UserCredentialsDao {
 
 	public UserCredentialsDaoImpl() {
-		super.setDaoType(UserCredentials.class );
+		super.setDaoType(StaffCredentials.class );
 		}
 
-	public UserCredentials findByUserName(String userName) {
+	public StaffCredentials findByUserName(String userName) {
 
 		Query query = entityManager.createQuery("select m from Authentication m  where m.userName =:userName");
-		return (UserCredentials) query.setParameter("userName", userName).getSingleResult();
+		return (StaffCredentials) query.setParameter("userName", userName).getSingleResult();
 
 	}
 

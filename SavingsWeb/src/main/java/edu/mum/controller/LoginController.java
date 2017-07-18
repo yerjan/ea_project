@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import edu.mum.domain.UserCredentials;
+import edu.mum.domain.StaffCredentials;
 import edu.mum.service.UserCredentialsService;
 
 @Controller
@@ -25,9 +25,9 @@ public class LoginController {
  
 	
 	@RequestMapping(value="/postLogin", method = RequestMethod.POST)
-	public String PostLogin(UserCredentials credentials, Model model) {
+	public String PostLogin(StaffCredentials credentials, Model model) {
 
-		UserCredentials validCredentials = credentialsService.findOne(credentials.getUserName());
+		StaffCredentials validCredentials = credentialsService.findOne(credentials.getUserName());
 		  
 		if (validCredentials == null)
 			return  "login";

@@ -4,15 +4,15 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
- import edu.mum.domain.UserCredentials;
+ import edu.mum.domain.StaffCredentials;
 
 @Component
 public interface UserCredentialsRestService {
 
- 	public List<UserCredentials> findAll();
+ 	public List<StaffCredentials> findAll();
 
-	public UserCredentials findOne(String index);
+	public StaffCredentials findOne(String index);
 
-	public UserCredentials save(UserCredentials member);
+	public StaffCredentials save(StaffCredentials member);
 
 }

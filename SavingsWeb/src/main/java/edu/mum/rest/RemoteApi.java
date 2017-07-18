@@ -48,6 +48,7 @@ public class RemoteApi {
 	}
 
 	public HttpEntity<?> getHttpEntity() {
+		System.out.println("getHttpHeaders: " + getHttpHeaders());
 		return new HttpEntity(getHttpHeaders());
 	}
 

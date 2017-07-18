@@ -21,7 +21,7 @@ public class StaffCredentials {
 	@Id
 	@Column(name = "USER_NAME", nullable = false, unique = true, length = 127)
 	String userName;
-	@Column(name = "PASSWORD", nullable = false, length = 32)
+	@Column(name = "PASSWORD", nullable = true, length = 32)
 	String password;
 	@Column(name = "VERIFY_PASSWORD", nullable = true, length = 32)
 	String verifyPassword;
@@ -29,7 +29,7 @@ public class StaffCredentials {
 	Boolean enabled;
 
 	@OneToOne(mappedBy = "userCredentials", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	// @JsonManagedReference
+	@JsonManagedReference
 	private Staff user;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
