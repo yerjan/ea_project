@@ -10,6 +10,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import java.io.Serializable;
@@ -31,6 +34,7 @@ public class Balance implements Serializable {
 	@Column(name = "INTEREST")
 	private BigDecimal interest;
 
+	@JsonBackReference
 	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinColumn(name = "ACCOUNT_ID")
 	private Savings savings;
