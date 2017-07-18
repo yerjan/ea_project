@@ -25,8 +25,9 @@ public class CustomerController {
 
 	@RequestMapping({"", "/all"})
 	public String listUsers(Model model) {
+		System.out.println("heree!");
 		List<Customer> customers = customerService.findAll();
-		model.addAttribute("customer", customers);
+		model.addAttribute("customers", customers);
 		
 		return "customers";
 	}

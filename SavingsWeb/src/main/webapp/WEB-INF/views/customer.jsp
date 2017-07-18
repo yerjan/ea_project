@@ -21,10 +21,10 @@
 		<h2>Customer Info</h2>
 		<div class='detail-container'>
 			<fieldset>
-				<div class='form-group'><label class='col-sm-4 control-label'>Name:</label> <div>John Wick</div></div>
-				<div class='form-group'><label class='col-sm-4 control-label'>Email:</label> <div>John.Wick@love.dog</div></div>
-				<div class='form-group'><label class='col-sm-4 control-label'>Status:</label> <div>Active</div></div>
-				<div class='form-group'><label class='col-sm-4 control-label'>Credit Score:</label> <div>700</div></div>
+				<div class='form-group'><label class='col-sm-4 control-label'>Name:</label> <div>${customer.firstName} ${customer.lastName} </div></div>
+				<div class='form-group'><label class='col-sm-4 control-label'>Email:</label> <div>${customer.email}</div></div>
+				<div class='form-group'><label class='col-sm-4 control-label'>Status:</label> <div>${customer.status}</div></div>
+				<div class='form-group'><label class='col-sm-4 control-label'>Credit Score:</label> <div>${customer.creditScore}</div></div>
 			</fieldset>
 		</div>
 
