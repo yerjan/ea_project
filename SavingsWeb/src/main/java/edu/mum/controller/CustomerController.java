@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import edu.mum.domain.Customer;
 import edu.mum.service.CustomerService;
+import edu.mum.service.SavingsService;
 
 @Controller
 @RequestMapping({"/customers"})
@@ -22,6 +23,9 @@ public class CustomerController {
 	
 	@Autowired
 	private CustomerService  customerService;
+
+	@Autowired
+	private SavingsService savingsService;
 
 	@RequestMapping({"", "/all"})
 	public String listUsers(Model model) {
@@ -35,6 +39,8 @@ public class CustomerController {
   	@RequestMapping("/{id}")
 	public String getUserById(@PathVariable("id") Long id,Model model) {
 		Customer customer = customerService.findOne(id);
+		customer.setSavings(savingsService.findByCustomerId(customer.getId()));
+		
 		model.addAttribute("customer", customer);
 
  		return "customer";
