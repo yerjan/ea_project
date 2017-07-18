@@ -1,8 +1,10 @@
 package edu.mum.dao;
 
+import java.util.List;
+
 import edu.mum.domain.Transaction;
 
 public interface TransactionDao extends GenericDao<Transaction> {
 
-	public Transaction listSavingsByAccount(Long accountId);
+	public List<Transaction> listTranByAccount(Long accountId);
 }

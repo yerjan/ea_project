@@ -41,6 +41,10 @@ public class SavingsServiceImpl implements SavingsService {
 		return (List<Savings>) savingsDao.findAll();
 	}
 
+	public List<Savings> findByCustomer(Long customerId) {
+		return (List<Savings>) savingsDao.findByCustomer(customerId);
+	}
+
 	public Savings update(Savings savings) {
 		return savingsDao.update(savings);
 
@@ -160,6 +164,20 @@ public class SavingsServiceImpl implements SavingsService {
 		Savings s = savingsDao.findOne(id);
 		s.setStatus("CLOSED");
 
+		return s;
+	}
+
+	@Override
+	public List<Transaction> listTransaction(Long id) {
+
+		List<Transaction> s = tranDao.listTranByAccount(id);
+		return s;
+	}
+
+	@Override
+	public Balance getActiveBalance(Long id) {
+
+		Balance s = balanceDao.findActiveBalance(id);
 		return s;
 	}
 
