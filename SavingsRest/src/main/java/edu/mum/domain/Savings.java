@@ -19,6 +19,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.Future;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -103,11 +104,9 @@ public class Savings implements Serializable {
 	private Long customerId;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "savings")
-	@JsonIgnore
 	private Set<Balance> balances = new HashSet<Balance>();
 
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "savings")
-	@JsonIgnore
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "savings")
 	private Set<Transaction> transactions = new HashSet<Transaction>();
 
 	public Long getId() {
