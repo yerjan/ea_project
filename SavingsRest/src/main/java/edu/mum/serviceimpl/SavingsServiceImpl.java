@@ -8,9 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.mum.dao.BalanceDao;
 import edu.mum.dao.SavingsDao;
+import edu.mum.dao.SysConfigDao;
 import edu.mum.dao.TransactionDao;
 import edu.mum.domain.Balance;
 import edu.mum.domain.Savings;
+import edu.mum.domain.SysConfig;
 import edu.mum.domain.Transaction;
 import edu.mum.service.SavingsService;
 
@@ -26,6 +28,9 @@ public class SavingsServiceImpl implements SavingsService {
 
 	@Autowired
 	private BalanceDao balanceDao;
+
+	@Autowired
+	private SysConfigDao sysConfigDao;
 
 	public void save(Savings savings) {
 		savingsDao.save(savings);
@@ -50,13 +55,19 @@ public class SavingsServiceImpl implements SavingsService {
 
 		Savings s = savingsDao.findOne(tran.getSavings().getId());
 
+		SysConfig sysConfig = sysConfigDao.getSysConfig();
+		tran.setTranDate(sysConfig.getSysDate());
+
 		Balance b = balanceDao.findByAccount(tran.getSavings().getId());
 		b.setPrincipal(b.getPrincipal().add(tran.getAmount()));
-		balanceDao.update(b);
+		if (b.getValueDate().compareTo(sysConfig.getSysDate()) == 0)
+			balanceDao.update(b);
+		else
+			balanceDao.save(b);
 
 		tran.setCurrency(s.getCurrency());
 		tran.setType("INCR");
-		// tran.setTranDate(); TODO
+
 		tranDao.save(tran);
 
 		return s;
@@ -66,13 +77,19 @@ public class SavingsServiceImpl implements SavingsService {
 	public Savings decrementBalance(Transaction tran) {
 		Savings s = savingsDao.findOne(tran.getSavings().getId());
 
+		SysConfig sysConfig = sysConfigDao.getSysConfig();
+		tran.setTranDate(sysConfig.getSysDate());
+
 		Balance b = balanceDao.findByAccount(tran.getSavings().getId());
 		b.setPrincipal(b.getPrincipal().subtract(tran.getAmount()));
-		balanceDao.update(b);
+		// balanceDao.update(b);
+		if (b.getValueDate().compareTo(sysConfig.getSysDate()) == 0)
+			balanceDao.update(b);
+		else
+			balanceDao.save(b);
 
 		tran.setCurrency(s.getCurrency());
 		tran.setType("DECR");
-		// tran.setTranDate(); TODO
 
 		tranDao.save(tran);
 
