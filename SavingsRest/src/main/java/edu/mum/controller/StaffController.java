@@ -19,27 +19,26 @@ import edu.mum.domain.Staff;
 import edu.mum.service.StaffService;
 
 @RestController
-@RequestMapping({"/Staffs"})
+@RequestMapping({ "/Staffs" })
 public class StaffController {
-	
+
 	@Autowired
-	private StaffService  userService;
+	private StaffService staffService;
 
 	@RequestMapping
-	public List<Staff>  listUsers(Model model) {
-		return userService.findAll();
+	public List<Staff> listUsers(Model model) {
+		return staffService.findAll();
 	}
-	
-  	@RequestMapping("/{id}")
+
+	@RequestMapping("/{id}")
 	public Staff getUserById(@PathVariable("id") Long id) {
-		return userService.findOne(id);
+		return staffService.findOne(id);
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public Staff processAddNewUserForm(@RequestBody Staff userToBeAdded) {
-			userService.save(userToBeAdded);
-	   	return null;
+		staffService.save(userToBeAdded);
+		return null;
 	}
-	
- 
+
 }

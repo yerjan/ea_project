@@ -11,45 +11,42 @@ import edu.mum.domain.Staff;
 import edu.mum.service.StaffCredentialsService;
 
 @Service
-@Transactional 
+@Transactional
 public class StaffServiceImpl implements edu.mum.service.StaffService {
-	
- 	@Autowired
-	private StaffDao userDao;
 
- 	@Autowired
+	@Autowired
+	private StaffDao staffDao;
+
+	@Autowired
 	private StaffCredentialsService credentialsService;
 
- 	
-     public void save( Staff user) {  		
-  		userDao.save(user);
- 	}
-  	
-     @Override
-    	public void saveFull( Staff user) {  		
-   		credentialsService.save(user.getUserCredentials());
-   		userDao.save(user);
- 	}
-   	
-	
+	public void save(Staff user) {
+		staffDao.save(user);
+	}
+
+	@Override
+	public void saveFull(Staff user) {
+		credentialsService.save(user.getUserCredentials());
+		staffDao.save(user);
+	}
+
 	public List<Staff> findAll() {
-		return (List<Staff>)userDao.findAll();
+		return (List<Staff>) staffDao.findAll();
 	}
 
 	public Staff findByEmail(String email) {
-		return userDao.findByEmail(email);
+		return staffDao.findByEmail(email);
 	}
-	
+
 	public Staff update(Staff user) {
-		 return userDao.update(user);
+		return staffDao.update(user);
 
 	}
 
 	@Override
 	public Staff findOne(Long id) {
-		 
-		return userDao.findOne(id);
+
+		return staffDao.findOne(id);
 	}
- 
 
 }
