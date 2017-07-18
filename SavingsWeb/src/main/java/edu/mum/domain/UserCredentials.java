@@ -33,7 +33,7 @@ public class UserCredentials {
 	Boolean enabled;
 
 	@OneToOne(mappedBy="userCredentials", cascade = {CascadeType.PERSIST, CascadeType.MERGE}) 
- 	private User user;
+ 	private Customer user;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable ( name="credential_authority", joinColumns={@JoinColumn(name="credential_id")},  
@@ -64,10 +64,10 @@ public class UserCredentials {
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-	public User getUser() {
+	public Customer getUser() {
 		return user;
 	}
-	public void setUser(User user) {
+	public void setUser(Customer user) {
 		this.user = user;
 	}
 	public List<Authority> getAuthority() {

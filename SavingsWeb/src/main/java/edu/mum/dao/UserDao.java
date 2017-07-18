@@ -1,8 +1,8 @@
 package edu.mum.dao;
 
-import edu.mum.domain.User;
+import edu.mum.domain.Customer;
 
-public interface UserDao extends GenericDao<User> {
+public interface UserDao extends GenericDao<Customer> {
       
-	public User findByEmail(String email);
+	public Customer findByEmail(String email);
 }

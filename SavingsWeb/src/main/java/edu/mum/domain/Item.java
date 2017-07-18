@@ -35,10 +35,10 @@ query="select i from Item i, Category c where c.name = :categoryName and i membe
 
 	@ManyToOne(fetch=FetchType.EAGER,  cascade = CascadeType.ALL) 
 	@JoinColumn(name="itemSellerId") 
-     private User seller;
+     private Customer seller;
 
 @Transient
-    private User buyer;
+    private Customer buyer;
 
     @Column(name = "DESCRIPTION", length = 4000, nullable = false)
     private String description;
@@ -51,7 +51,7 @@ query="select i from Item i, Category c where c.name = :categoryName and i membe
      private Set<Category> categories = new HashSet<Category>();
 
     @Transient
-	private User approvedBy;
+	private Customer approvedBy;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "APPROVAL_DATETIME", nullable = true)
@@ -82,10 +82,10 @@ query="select i from Item i, Category c where c.name = :categoryName and i membe
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    public User getSeller() { return seller; }
+    public Customer getSeller() { return seller; }
 
-    public User getBuyer() { return buyer; }
-    public void setBuyer(User buyer) { this.buyer = buyer; }
+    public Customer getBuyer() { return buyer; }
+    public void setBuyer(Customer buyer) { this.buyer = buyer; }
 
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
@@ -106,8 +106,8 @@ query="select i from Item i, Category c where c.name = :categoryName and i membe
 		category.getItems().add(this);
 	}
 
-    public User getApprovedBy() { return approvedBy; }
-    public void setApprovedBy(User approvedBy) { this.approvedBy = approvedBy; }
+    public Customer getApprovedBy() { return approvedBy; }
+    public void setApprovedBy(Customer approvedBy) { this.approvedBy = approvedBy; }
 
     public Date getApprovalDatetime() { return approvalDatetime; }
     public void setApprovalDatetime(Date approvalDatetime) { this.approvalDatetime = approvalDatetime; }
@@ -119,7 +119,7 @@ query="select i from Item i, Category c where c.name = :categoryName and i membe
     public void setId(Long id) {
 		this.id = id;
 	}
-	public void setSeller(User seller) {
+	public void setSeller(Customer seller) {
 		this.seller = seller;
 	}
 	public void setCategories(Set<Category> categories) {

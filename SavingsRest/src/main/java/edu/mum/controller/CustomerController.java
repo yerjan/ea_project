@@ -16,28 +16,20 @@ import edu.mum.domain.Customer;
 import edu.mum.service.CustomerService;
 
 @RestController
-@RequestMapping({ "/Customers" })
+@RequestMapping({ "/customers" })
 public class CustomerController {
 
 	@Autowired
-	private CustomerService userService;
+	private CustomerService customerService;
 
 	@RequestMapping
 	public List<Customer> listUsers(Model model) {
-		return userService.findAll();
+		return customerService.findAll();
 	}
 
 	@RequestMapping("/{id}")
 	public Customer getUserById(@PathVariable("id") Long id) {
-		return userService.findOne(id);
-	}
-
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public Customer processAddNewUserForm(@RequestBody Customer userToBeAdded) {
-		userService.save(userToBeAdded);
-
-		return null;
-
+		return customerService.findOne(id);
 	}
 
 }

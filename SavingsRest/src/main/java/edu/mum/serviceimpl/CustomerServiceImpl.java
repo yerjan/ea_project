@@ -15,28 +15,28 @@ import edu.mum.service.CustomerService;
 public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
-	private CustomerDao userDao;
+	private CustomerDao customerDao;
 
 	@Override
 	public void save(Customer user) {
-		userDao.save(user);
+		customerDao.save(user);
 	}
 
 	@Override
 	public List<Customer> findAll() {
-		return (List<Customer>) userDao.findAll();
+		return (List<Customer>) customerDao.findAll();
 	}
 
 	@Override
 	public Customer update(Customer user) {
-		return userDao.update(user);
+		return customerDao.update(user);
 
 	}
 
 	@Override
 	public Customer findOne(Long id) {
 
-		return userDao.findOne(id);
+		return customerDao.findOne(id);
 	}
 
 }

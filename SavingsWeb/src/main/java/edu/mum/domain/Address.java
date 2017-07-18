@@ -21,7 +21,7 @@ import org.hibernate.validator.constraints.Range;
  * it is a component. Of course, other entity classes can also
  * embed addresses.
  *
- * @see User
+ * @see Customer
  * @author Christian Bauer
  */
 @Entity
@@ -43,7 +43,7 @@ public class Address implements Serializable {
 	private String city;
 
   	@ManyToOne(fetch=FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-  	private User  user;
+  	private Customer  user;
 
 	/**
 	 * No-arg constructor for JavaBean tools
@@ -80,11 +80,11 @@ public class Address implements Serializable {
 		this.id = id;
 	}
 
-	public User getUser() {
+	public Customer getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(Customer user) {
 		this.user = user;
 	}
 

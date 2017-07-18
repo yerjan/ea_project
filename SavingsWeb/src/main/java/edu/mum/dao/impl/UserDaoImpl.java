@@ -7,21 +7,21 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
 import edu.mum.dao.UserDao;
-import edu.mum.domain.User;
+import edu.mum.domain.Customer;
 
 
 @SuppressWarnings("unchecked")
 @Repository
-public class UserDaoImpl extends GenericDaoImpl<User> implements UserDao {
+public class UserDaoImpl extends GenericDaoImpl<Customer> implements UserDao {
 
 	public UserDaoImpl() {
-		super.setDaoType(User.class );
+		super.setDaoType(Customer.class );
 		}
 
-	public User findByEmail(String email) {
+	public Customer findByEmail(String email) {
 	     
 		Query query = entityManager.createQuery("select u from User u  where u.email =:email");
-		return (User) query.setParameter("email", email).getSingleResult();
+		return (Customer) query.setParameter("email", email).getSingleResult();
 			     
 
 	}
