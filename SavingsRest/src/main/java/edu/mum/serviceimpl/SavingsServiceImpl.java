@@ -60,21 +60,35 @@ public class SavingsServiceImpl implements SavingsService {
 		tran.setTranDate(sysConfig.getSysDate());
 
 		Balance b = balanceDao.findActiveBalance(tran.getSavings().getId());
-		if (b == null || sysConfig.getSysDate().compareTo(b.getValueDate()) != 0) {
-			balanceDao.updateBalanceStatus(s.getId());
 
-			b = new Balance();
-			b.setInterest(new BigDecimal(0));
-			b.setPrincipal(tran.getAmount());
-			b.setSavings(s);
-			b.setStatus(0);
-			b.setValueDate(sysConfig.getSysDate());
+		if (b == null) {
+			// balanceDao.updateBalanceStatus(s.getId());
+
+			Balance b1 = new Balance();
+			b1.setInterest(new BigDecimal(0));
+			b1.setPrincipal(tran.getAmount());
+			b1.setSavings(s);
+			b1.setStatus(0);
+			b1.setValueDate(sysConfig.getSysDate());
 			balanceDao.save(b);
 
 		} else {
-			b.setPrincipal(b.getPrincipal().add(tran.getAmount()));
-			b.setValueDate(sysConfig.getSysDate());
-			balanceDao.update(b);
+			if (sysConfig.getSysDate().compareTo(b.getValueDate()) != 0) {
+				b.setStatus(1);
+
+				Balance b1 = new Balance();
+				b1.setInterest(new BigDecimal(0));
+				b1.setPrincipal(tran.getAmount());
+				b1.setSavings(s);
+				b1.setStatus(0);
+				b1.setValueDate(sysConfig.getSysDate());
+				balanceDao.save(b);
+
+			} else {
+				b.setPrincipal(b.getPrincipal().add(tran.getAmount()));
+				b.setValueDate(sysConfig.getSysDate());
+				balanceDao.update(b);
+			}
 		}
 
 		tran.setCurrency(s.getCurrency());
@@ -91,23 +105,36 @@ public class SavingsServiceImpl implements SavingsService {
 
 		SysConfig sysConfig = sysConfigDao.getSysConfig();
 		tran.setTranDate(sysConfig.getSysDate());
-
 		Balance b = balanceDao.findActiveBalance(tran.getSavings().getId());
-		if (b == null || sysConfig.getSysDate().compareTo(b.getValueDate()) != 0) {
-			balanceDao.updateBalanceStatus(s.getId());
 
-			b = new Balance();
-			b.setInterest(new BigDecimal(0));
-			b.setPrincipal(tran.getAmount());
-			b.setSavings(s);
-			b.setStatus(0);
-			b.setValueDate(sysConfig.getSysDate());
+		if (b == null) {
+			// balanceDao.updateBalanceStatus(s.getId());
+
+			Balance b1 = new Balance();
+			b1.setInterest(new BigDecimal(0));
+			b1.setPrincipal(tran.getAmount());
+			b1.setSavings(s);
+			b1.setStatus(0);
+			b1.setValueDate(sysConfig.getSysDate());
 			balanceDao.save(b);
 
 		} else {
-			b.setPrincipal(b.getPrincipal().subtract(tran.getAmount()));
-			b.setValueDate(sysConfig.getSysDate());
-			balanceDao.update(b);
+			if (sysConfig.getSysDate().compareTo(b.getValueDate()) != 0) {
+				b.setStatus(1);
+
+				Balance b1 = new Balance();
+				b1.setInterest(new BigDecimal(0));
+				b1.setPrincipal(tran.getAmount());
+				b1.setSavings(s);
+				b1.setStatus(0);
+				b1.setValueDate(sysConfig.getSysDate());
+				balanceDao.save(b);
+
+			} else {
+				b.setPrincipal(b.getPrincipal().subtract(tran.getAmount()));
+				b.setValueDate(sysConfig.getSysDate());
+				balanceDao.update(b);
+			}
 		}
 
 		tran.setCurrency(s.getCurrency());
