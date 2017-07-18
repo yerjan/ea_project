@@ -35,9 +35,6 @@ public class Savings implements Serializable {
 	@Column(name = "ACCOUNT_ID")
 	private Long id = null;
 
-	@Version
-	private int version = 0;
-
 	@Column(name = "NAME", nullable = false)
 	private String name;
 
@@ -119,14 +116,6 @@ public class Savings implements Serializable {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
 	}
 
 	public String getName() {

@@ -37,7 +37,7 @@ public class SavingsController {
 		try {
 			savingsService.save(savingsToBeAdded);
 		} catch (Exception up) {
-			System.out.println("Transaction Failed!!!");
+			System.out.println("transaction Failed!!!");
 
 		}
 
@@ -52,7 +52,7 @@ public class SavingsController {
 			s = savingsService.incrementBalance(tran);
 
 		} catch (Exception up) {
-			System.out.println("Transaction Failed!!!");
+			System.out.println("Income transaction Failed!!!");
 
 		}
 
@@ -67,7 +67,7 @@ public class SavingsController {
 			s = savingsService.decrementBalance(tran);
 
 		} catch (Exception up) {
-			System.out.println("Transaction Failed!!!");
+			System.out.println("Withdraw transaction Failed!!!");
 
 		}
 
@@ -82,7 +82,7 @@ public class SavingsController {
 			s = savingsService.closeSavings(savings.getId());
 
 		} catch (Exception up) {
-			System.out.println("Transaction Failed!!!");
+			System.out.println("Close transaction Failed!!!");
 
 		}
 
@@ -97,7 +97,7 @@ public class SavingsController {
 			s = savingsService.openSavings(savings.getId());
 
 		} catch (Exception up) {
-			System.out.println("Transaction Failed!!!");
+			System.out.println("Open transaction Failed!!!");
 
 		}
 
