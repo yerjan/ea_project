@@ -43,7 +43,7 @@ public class Transaction implements Serializable {
 	private BigDecimal amount;
 	
 	//@JsonIgnore
-	@JsonBackReference
+	//@JsonBackReference
 	//@JsonManagedReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ACCOUNT_ID")

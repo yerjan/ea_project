@@ -77,7 +77,7 @@ public class SavingsController {
 			System.out.println("Income transaction Failed!!!");
 			
 		}
-		return null;
+		return t;
 	}
 
 	@RequestMapping(value = "/withdraw", method = RequestMethod.POST)
@@ -93,7 +93,7 @@ public class SavingsController {
 			System.out.println("Withdraw transaction Failed!!!");
 
 		}
-		return null;
+		return t;
 	}
 
 	@RequestMapping(value = "/close", method = RequestMethod.POST)

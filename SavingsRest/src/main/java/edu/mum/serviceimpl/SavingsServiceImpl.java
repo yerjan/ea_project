@@ -59,9 +59,10 @@ public class SavingsServiceImpl implements SavingsService {
 	public Transaction incrementBalance(Transaction tran) {
 		System.out.println("incrementBalance: " + tran.getAmount());
 		System.out.println("incrementBalance: " + tran.getDescription());
-		System.out.println("incrementBalance: " + tran.getSavings().getId());
+		
 		Savings s = null;
 		try {
+			System.out.println("incrementBalance: " + tran.getSavings().getId());
 			s = savingsDao.findOne(tran.getSavings().getId());
 			System.out.println("savings: " + s.getName());
 			

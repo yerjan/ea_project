@@ -96,4 +96,26 @@ public class SavingsController {
 
 	}
 
+	@RequestMapping(value = "/open", method = RequestMethod.POST)
+	public String processOpen(@RequestParam("accountId") Long id) {
+
+		Savings savings = savingsService.findOne(id);
+
+		Savings s = savingsService.processOpen(id);
+
+		return "redirect:/savings/" + savings.getId();
+
+	}
+
+	@RequestMapping(value = "/close", method = RequestMethod.POST)
+	public String processClose(@RequestParam("accountId") Long id) {
+
+		Savings savings = savingsService.findOne(id);
+
+		Savings s = savingsService.processClose(id);
+
+		return "redirect:/savings/" + savings.getId();
+
+	}
+
 }
