@@ -16,7 +16,7 @@ import edu.mum.rest.service.CustomerRestService;
 import edu.mum.rest.service.SavingRestService;
 
 @Component
-public class SavingRestServiceImpl implements SavingRestService {
+public class SavingsRestServiceImpl implements SavingRestService {
 
 	@Autowired
 	RemoteApi remoteApi;
