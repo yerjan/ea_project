@@ -19,7 +19,7 @@ public class TransactionDaoImpl extends GenericDaoImpl<Transaction> implements T
 	@Override
 	public List<Transaction> listTranByAccount(Long accountId) {
 
-		Query query = entityManager.createQuery("select u from Transaction u  where u.savings.accountId =:accountId");
+		Query query = entityManager.createQuery("select u from Transaction u  where u.savings.id =:accountId");
 		return (List<Transaction>) query.setParameter("accountId", accountId).getResultList();
 
 	}

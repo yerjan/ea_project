@@ -32,8 +32,8 @@ public class RemoteApi {
 	*/
 	public HttpHeaders getHttpHeaders() {
 
-		String username = "admin";
-		String password = "admin";
+		String username = "admin1";
+		String password = "admin1";
 		
         String auth = username + ":" + password;
         byte[] encodedAuth = Base64.encodeBase64( 

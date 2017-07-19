@@ -96,7 +96,7 @@ public class SavingsServiceImpl implements SavingsService {
 		}
 
 		tran.setCurrency(s.getCurrency());
-		tran.setType("INCR");
+		tran.setType("INCOME");
 
 		tranDao.save(tran);
 
@@ -142,7 +142,7 @@ public class SavingsServiceImpl implements SavingsService {
 		}
 
 		tran.setCurrency(s.getCurrency());
-		tran.setType("DECR");
+		tran.setType("WITHDRAW");
 
 		tranDao.save(tran);
 

@@ -33,7 +33,7 @@ public class SavingsController {
 	}
 
 	@RequestMapping("/{id}")
-	public Savings getSavingsById(@PathVariable("id") Long id) {
+	public Savings findOne(@PathVariable("id") Long id) {
 		return savingsService.findOne(id);
 	}
 

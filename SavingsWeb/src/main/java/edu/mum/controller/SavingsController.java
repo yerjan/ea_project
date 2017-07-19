@@ -13,39 +13,48 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import edu.mum.domain.Customer;
+import edu.mum.domain.Balance;
 import edu.mum.domain.Savings;
-import edu.mum.service.CustomerService;
+import edu.mum.domain.Transaction;
 import edu.mum.service.SavingsService;
 
 @Controller
-@RequestMapping({"/customers"})
+@RequestMapping({ "/savings" })
 public class SavingsController {
-	
-	@Autowired
-	private CustomerService  customerService;
 
 	@Autowired
 	private SavingsService savingsService;
 
-	@RequestMapping({"", "/all"})
-	public String listUsers(Model model) {
-		System.out.println("heree!");
-		List<Customer> customers = customerService.findAll();
-		model.addAttribute("customers", customers);
-		
-		return "customers";
-	}
-	
-  	@RequestMapping("/{id}")
-	public String getUserById(@PathVariable("id") Long id,Model model) {
-		Customer customer = customerService.findOne(id);
-		List<Savings> savings = savingsService.findByCustomerId(customer.getId());
-		
-		model.addAttribute("customer", customer);
+	@RequestMapping("/{id}")
+	public String getSavingsById(@PathVariable("id") Long id, Model model) {
+		Savings savings = savingsService.findOne(id);
+		List<Transaction> transactions = savingsService.tranListByAccountId(id);
+		Balance balance = savingsService.getActiveBalance(id);
+		model.addAttribute("transactions", transactions);
 		model.addAttribute("savings", savings);
+		model.addAttribute("balance", balance);
 
- 		return "customer";
+		return "savings";
 	}
- 
+
+	@RequestMapping(value = "/income", method = RequestMethod.GET)
+	public String getIncomeForm(@ModelAttribute("newTransaction") Transaction newTransaction) {
+		return "TranIncome";
+	}
+
+	@RequestMapping(value = "/income", method = RequestMethod.POST)
+	public String processIncomeForm(@ModelAttribute("newTransaction") @Valid Transaction tranToBeAdded,
+			BindingResult result) {
+
+		if (result.hasErrors()) {
+			return "income";
+		}
+
+		// Error caught by ControllerAdvice IF no authorization...
+		Savings s = savingsService.processIncome(tranToBeAdded);
+
+		return "redirect:/savings/" + s.getId();
+
+	}
+
 }

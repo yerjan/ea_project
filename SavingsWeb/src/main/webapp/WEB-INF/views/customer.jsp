@@ -34,7 +34,6 @@
 				<a href="#" class='btn btn-primary'>Add New Account</a>
 			</div>
 		</div>
-		<h2></h2>
 
 		<table class="table">
 			<thead>
