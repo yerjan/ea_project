@@ -51,7 +51,7 @@
 				<c:forEach items="#{savings}" var="saving">
 					<tr>
 						<td>${saving.id}</td> 
-						<td><a href="view2.html">${saving.name}</a> </td>
+						<td><a href="<spring:url value="/savings/${saving.id}"/>">${saving.name}</a> </td>
 						<td>${saving.currency}</td>
 						<td>${saving.status}</td>
 						<td>${saving.interestRate}</td>
