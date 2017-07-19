@@ -64,7 +64,7 @@ public class SavingsController {
 		tranToBeAdded.setSavings(savings);
 		System.out.println("processIncomeForm3: " + savings.getId());
 		// Error caught by ControllerAdvice IF no authorization...
-		Savings s = savingsService.processWithdraw(tranToBeAdded);
+		Savings s = savingsService.processIncome(tranToBeAdded);
 		System.out.println("processIncomeForm4: ");
 		return "redirect:/savings/" + savings.getId();
 
@@ -90,7 +90,7 @@ public class SavingsController {
 		tranToBeAdded.setSavings(savings);
 		System.out.println("processIncomeForm3: " + savings.getId());
 		// Error caught by ControllerAdvice IF no authorization...
-		Savings s = savingsService.processIncome(tranToBeAdded);
+		Savings s = savingsService.processWithdraw(tranToBeAdded);
 		System.out.println("processIncomeForm4: ");
 		return "redirect:/savings/" + savings.getId();
 
