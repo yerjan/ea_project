@@ -64,6 +64,32 @@ public class SavingsController {
 		tranToBeAdded.setSavings(savings);
 		System.out.println("processIncomeForm3: " + savings.getId());
 		// Error caught by ControllerAdvice IF no authorization...
+		Savings s = savingsService.processWithdraw(tranToBeAdded);
+		System.out.println("processIncomeForm4: ");
+		return "redirect:/savings/" + savings.getId();
+
+	}
+
+	@RequestMapping(value = "/withdraw", method = RequestMethod.GET)
+	public String getWithdrawForm(@RequestParam("accountId") Long id,
+			@ModelAttribute("newTransaction") Transaction newTransaction) {
+		Savings savings = savingsService.findOne(id);
+		newTransaction.setSavings(savings);
+		return "TranWithdraw";
+	}
+
+	@RequestMapping(value = "/withdraw", method = RequestMethod.POST)
+	public String processWithdrawForm(@ModelAttribute("newTransaction") @Valid Transaction tranToBeAdded,
+			BindingResult result) {
+		System.out.println("processIncomeForm");
+		if (result.hasErrors()) {
+			return "TranWithdraw";
+		}
+		System.out.println("processIncomeForm1");
+		Savings savings = savingsService.findOne(tranToBeAdded.getSavings().getId());
+		tranToBeAdded.setSavings(savings);
+		System.out.println("processIncomeForm3: " + savings.getId());
+		// Error caught by ControllerAdvice IF no authorization...
 		Savings s = savingsService.processIncome(tranToBeAdded);
 		System.out.println("processIncomeForm4: ");
 		return "redirect:/savings/" + savings.getId();
