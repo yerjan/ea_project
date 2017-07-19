@@ -32,4 +32,16 @@ public class SavingsController {
 		return "savings";
 	}
 
+	@RequestMapping("/income/{id}")
+	public String getSavingsById1(@PathVariable("id") Long id, Model model) {
+		Savings savings = savingsService.findOne(id);
+		List<Transaction> transactions = savingsService.tranListByAccountId(id);
+		Balance balance = savingsService.getActiveBalance(id);
+		model.addAttribute("transactions", transactions);
+		model.addAttribute("savings", savings);
+		model.addAttribute("balance", balance);
+
+		return "savings";
+	}
+
 }
