@@ -6,14 +6,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet"
 	href="<spring:url value="/resource/bootstrap-3.3.7-dist/css/bootstrap.min.css"  htmlEscape="true" />">
-<title>Customer List</title>
+<title>Savings Detail</title>
 </head>
 <body>
 	
 	<div class="container">
 
 		<div class="subtitle">
-			Customer Information
+			Savings Information
 			<div>
 				<a href="#" class='btn btn-primary'>Add Account</a>
 				<a href="#" class='btn btn-primary'>button</a>

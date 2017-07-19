@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.mum.domain.Balance;
 import edu.mum.domain.Savings;
 import edu.mum.domain.Transaction;
 import edu.mum.service.SavingsService;
@@ -22,8 +24,12 @@ public class SavingsController {
 	private SavingsService savingsService;
 
 	@RequestMapping
-	public List<Savings> listSavings(Model model) {
-		return savingsService.findAll();
+	public List<Savings> listSavings(Model model, @RequestParam(value = "customerId", required = false) Long id) {
+		if (id != null) {
+			return savingsService.findByCustomer(id);
+		} else {
+			return savingsService.findAll();
+		}
 	}
 
 	@RequestMapping("/{id}")
@@ -37,7 +43,7 @@ public class SavingsController {
 		try {
 			savingsService.save(savingsToBeAdded);
 		} catch (Exception up) {
-			System.out.println("Transaction Failed!!!");
+			System.out.println("transaction Failed!!!");
 
 		}
 
@@ -52,7 +58,7 @@ public class SavingsController {
 			s = savingsService.incrementBalance(tran);
 
 		} catch (Exception up) {
-			System.out.println("Transaction Failed!!!");
+			System.out.println("Income transaction Failed!!!");
 
 		}
 
@@ -67,7 +73,7 @@ public class SavingsController {
 			s = savingsService.decrementBalance(tran);
 
 		} catch (Exception up) {
-			System.out.println("Transaction Failed!!!");
+			System.out.println("Withdraw transaction Failed!!!");
 
 		}
 
@@ -82,7 +88,7 @@ public class SavingsController {
 			s = savingsService.closeSavings(savings.getId());
 
 		} catch (Exception up) {
-			System.out.println("Transaction Failed!!!");
+			System.out.println("Close transaction Failed!!!");
 
 		}
 
@@ -91,17 +97,40 @@ public class SavingsController {
 	}
 
 	@RequestMapping(value = "/open", method = RequestMethod.POST)
-	public Savings processOpen(@RequestBody Savings savings) {
+	public Savings processOpen(Model model, @RequestParam(value = "accountId") Long id) {
 		Savings s = null;
 		try {
-			s = savingsService.openSavings(savings.getId());
+			s = savingsService.openSavings(id);
 
 		} catch (Exception up) {
-			System.out.println("Transaction Failed!!!");
+			System.out.println("Open transaction Failed!!!");
 
 		}
 
 		return s;
+
+	}
+
+	// www.something.com/customers/
+	// www.something.com/customers?age=5
+	// www.something.com/customers/5
+
+	// www.something.com/savings?customerId=5
+	// www.something.com/savings/5
+
+	// www.something.com//
+
+	@RequestMapping(value = "/transaction")
+	public List<Transaction> listTranByAccount(Model model, @RequestParam(value = "accountId") Long id) {
+
+		return savingsService.listTransaction(id);
+
+	}
+
+	@RequestMapping(value = "/balance")
+	public Balance getActiveBalance(Model model, @RequestParam(value = "accountId") Long id) {
+
+		return savingsService.getActiveBalance(id);
 
 	}
 
