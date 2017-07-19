@@ -15,49 +15,50 @@
 		<div class="subtitle">
 			Savings Information
 			<div>
-				<a href="#" class='btn btn-primary'>Add Account</a>
-				<a href="#" class='btn btn-primary'>button</a>
+				<a href="#" class='btn btn-primary'>Open</a>
+				<a href="#" class='btn btn-primary'>Close</a>
 			</div>
 		</div>
 		<div class='detail-container'>
 			<fieldset>
-				<div class='form-group'><label class='col-sm-4 control-label'>Name:</label> <div>${customer.firstName} ${customer.lastName} </div></div>
-				<div class='form-group'><label class='col-sm-4 control-label'>Email:</label> <div>${customer.email}</div></div>
-				<div class='form-group'><label class='col-sm-4 control-label'>Status:</label> <div>${customer.status}</div></div>
-				<div class='form-group'><label class='col-sm-4 control-label'>Credit Score:</label> <div>${customer.creditScore}</div></div>
+				<div class='form-group'><label class='col-sm-4 control-label'>Account id:</label> <div>${savings.id} </div></div>
+				<div class='form-group'><label class='col-sm-4 control-label'>Name:</label> <div>${savings.name}</div></div>
+				<div class='form-group'><label class='col-sm-4 control-label'>Start Date:</label> <div>${savings.startDate}</div></div>
+				<div class='form-group'><label class='col-sm-4 control-label'>End Date:</label> <div>${savings.endDate}</div></div>
+				<div class='form-group'><label class='col-sm-4 control-label'>Principal:</label> <div>${balance.principal}</div></div>
+				<div class='form-group'><label class='col-sm-4 control-label'>Interest:</label> <div>${balance.interest}</div></div>
+				<div class='form-group'><label class='col-sm-4 control-label'>Status:</label> <div>${savings.status}</div></div>
 			</fieldset>
 		</div>
 
 		<div class="subtitle">
-			Saving Accounts
+			Transactions
 			<div>
-				<a href="#" class='btn btn-primary'>Add New Account</a>
+				<a href="#" class='btn btn-primary'>Income</a>
+				<a href="#" class='btn btn-primary'>Withdraw</a>
 			</div>
+
 		</div>
 		<h2></h2>
 
 		<table class="table">
 			<thead>
 				<tr>
-					<th>Account ID</th>
-					<th>Name</th>
+					<th>Tran ID</th>
+					<th>Amount</th>
 					<th>Currency</th>
-					<th>Status</th>
-					<th>Interest Rate</th>
-					<th>Starting Date</th>
-					<th>Ending Date</th>
+					<th>Description</th>
+					<th>Type</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="#{savings}" var="saving">
+				<c:forEach items="#{transactions}" var="tran">
 					<tr>
-						<td>${saving.id}</td> 
-						<td><a href="view2.html">${saving.name}</a> </td>
-						<td>${saving.currency}</td>
-						<td>${saving.status}</td>
-						<td>${saving.interestRate}</td>
-						<td>${saving.startDate}</td>
-						<td>${saving.endDate}</td>
+						<td>${tran.id}</td> 
+						<td>${tran.currency}</td>
+						<td>${tran.amount}</td>
+						<td>${tran.description}</td>
+						<td>${tran.type}</td>
 
 					</tr>
 				</c:forEach>
