@@ -1,6 +1,7 @@
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
- 
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -12,37 +13,47 @@
 	<section>
 		<div class="jumbotron">
 			<div class="container">
-				<h1>One of our People</h1>
-				<p>An important contributor  to our Community!!!</p>
+				<h1>Valued Users</h1>
+				<p>Add a new one
+				<p>
 			</div>
-   			
- 							<div class="pull-left"> <h3>${SpecialBlurb}</h3> </div>
- 				<a href="<spring:url value="/users/add" />" class="btn btn-danger btn-mini pull-right">Add a new one</a>	
- 				<br>
- 		 	
 		</div>
 	</section>
-
 	<section class="container">
-	
-	<div class="form-group">
-			    <label for="accountName" class="col-sm-2 control-label">Name</label>
-			    <div class="col-sm-10">
-			      <input type="text" class="form-control" id="accountName" name="name" placeholder="Name">
-			    </div>
-			  </div>
-			  
-		<div class="row">
- 				<div class="col-sm-6 col-md-3" style="padding-bottom: 15px">
-					<div class="thumbnail">
- 						<div class="caption">
-							<h3>First Name - ${user.firstName}</h3>
-							<h3>Last Name -  ${user.lastName}</h3> 
-						</div>
+		<form:form modelAttribute="newTransaction" class="form-horizontal">
+			<fieldset>
+				<legend>Make income</legend>
+
+				<form:errors path="*" cssClass="alert alert-danger" element="div" />
+
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="amount">Amount</label>
+					<div class="col-lg-10">
+						<form:input id="amount" path="amount" type="text"
+							class="form:input-large" />
+						<form:errors path="amount" cssClass="text-danger" />
 					</div>
 				</div>
- 
-		</div>
+
+				<div class="form-group">
+					<label class="control-label col-lg-2" for="description">Description</label>
+					<div class="col-lg-10">
+						<form:input id="description" path="description" type="text"
+							class="form:input-large" />
+						<form:errors path="description" cssClass="text-danger" />
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<div class="col-lg-offset-2 col-lg-10">
+						<input type="submit" id="btnAdd" class="btn btn-primary"
+							value="Process" />
+					</div>
+				</div>
+
+			</fieldset>
+		</form:form>
 	</section>
 </body>
 </html>

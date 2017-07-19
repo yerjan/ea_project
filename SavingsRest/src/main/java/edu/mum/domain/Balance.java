@@ -35,7 +35,7 @@ public class Balance implements Serializable {
 	private BigDecimal interest;
 
 	@JsonBackReference
-	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToOne(fetch = FetchType.LAZY, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinColumn(name = "ACCOUNT_ID")
 	private Savings savings;
 
