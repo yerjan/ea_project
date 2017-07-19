@@ -36,4 +36,13 @@ public class SavingsServiceImpl implements SavingsService {
 		return savingRestService.getActiveBalance(id);
 	}
 
+	public Savings processIncome(Transaction tran) {
+		return savingRestService.processIncome(tran);
+	}
+
+	public Savings processWithdraw(Transaction tran) {
+		return savingRestService.processWithdraw(tran);
+
+	}
+
 }

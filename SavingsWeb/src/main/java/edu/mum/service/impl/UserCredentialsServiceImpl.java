@@ -16,7 +16,7 @@ public class UserCredentialsServiceImpl implements edu.mum.service.UserCredentia
  	@Autowired
 	private UserCredentialsRestService userCredentialsRestService;
 
- 	
+	 
      public void save( StaffCredentials userCredentials) {  		
   		userCredentialsRestService.save(userCredentials);
  	}

@@ -103,11 +103,13 @@ public class Savings implements Serializable {
 	@Column(name = "CUSTOMER_ID", nullable = false)
 	private Long customerId;
 
-	@JsonBackReference
+	@JsonIgnore
+	//@JsonBackReference
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "savings")
 	private Set<Balance> balances = new HashSet<Balance>();
 
-	@JsonBackReference
+	@JsonIgnore
+	//@JsonBackReference
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "savings")
 	private Set<Transaction> transactions = new HashSet<Transaction>();
 

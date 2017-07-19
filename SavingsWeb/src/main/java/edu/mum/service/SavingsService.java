@@ -16,4 +16,8 @@ public interface SavingsService {
 	public List<Transaction> tranListByAccountId(Long id);
 
 	public Balance getActiveBalance(Long id);
+
+	public Savings processIncome(Transaction tran);
+
+	public Savings processWithdraw(Transaction tran);
 }

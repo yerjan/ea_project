@@ -7,7 +7,7 @@ import edu.mum.domain.Savings;
 import edu.mum.domain.Transaction;
 
 public interface SavingsService {
-
+	//Aop
 	public void save(Savings savings);
 
 	public List<Savings> findAll();
@@ -15,7 +15,7 @@ public interface SavingsService {
 	public List<Savings> findByCustomer(Long customerId);
 
 	public Savings findOne(Long id);
-
+	//Aop
 	public Savings update(Savings user);
 
 	public Transaction incrementBalance(Transaction tran);

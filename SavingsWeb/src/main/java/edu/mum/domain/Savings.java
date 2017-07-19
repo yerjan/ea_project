@@ -58,16 +58,18 @@ public class Savings implements Serializable {
 	@Column(name = "END_DATE", nullable = false)
 	private Date endDate;
 
-	@JsonBackReference
+	//@JsonBackReference
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name="CUSTOMER_ID")
 	private Customer customer;
+	
+//	@JsonIgnore
+	//@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "savings")
+	//private Set<Balance> balances = new HashSet<Balance>();
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "savings")
-	private Set<Balance> balances = new HashSet<Balance>();
-
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "savings")
-	private Set<Transaction> transactions = new HashSet<Transaction>();
+	//@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "savings")
+	//private Set<Transaction> transactions = new HashSet<Transaction>();
 
 
 	public Double getInterestRate() {
@@ -94,14 +96,7 @@ public class Savings implements Serializable {
 		this.endDate = endDate;
 	}
 
-	public Set<Transaction> getTransactions() {
-		return transactions;
-	}
-
-	public void setTransactions(Set<Transaction> transactions) {
-		this.transactions = transactions;
-	}
-
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -147,12 +142,5 @@ public class Savings implements Serializable {
 		this.currency = currency;
 	}
 
-	public Set<Balance> getBalances() {
-		return balances;
-	}
-
-	public void setBalances(Set<Balance> balances) {
-		this.balances = balances;
-	}
-
+	
 }
