@@ -65,32 +65,35 @@ public class SavingsController {
 	}
 
 	@RequestMapping(value = "/income", method = RequestMethod.POST)
-	public void processIncome(@RequestBody Transaction tran) {
+	public Transaction processIncome(@RequestBody Transaction tran) {
 		Transaction t = null;
 		try {
 			t = savingsService.incrementBalance(tran);
 			Customer customer = customerService.findOne(t.getSavings().getCustomerId());
 			
 			messageService.publish(customerMessageTemplate, t, customer.getFullName());
+			return t;
 		} catch (Exception up) {
 			System.out.println("Income transaction Failed!!!");
-
+			
 		}
-
+		return null;
 	}
 
 	@RequestMapping(value = "/withdraw", method = RequestMethod.POST)
-	public void processWithdraw(@RequestBody Transaction tran) {
+	public Transaction processWithdraw(@RequestBody Transaction tran) {
 		Transaction t = null;
 		try {
 			t = savingsService.decrementBalance(tran);
 			Customer customer = customerService.findOne(t.getSavings().getCustomerId());
 			
 			messageService.publish(customerMessageTemplate, t, customer.getFullName());
+			return t;
 		} catch (Exception up) {
 			System.out.println("Withdraw transaction Failed!!!");
 
 		}
+		return null;
 	}
 
 	@RequestMapping(value = "/close", method = RequestMethod.POST)
