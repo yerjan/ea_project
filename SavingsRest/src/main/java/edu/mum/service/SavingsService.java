@@ -18,9 +18,9 @@ public interface SavingsService {
 
 	public Savings update(Savings user);
 
-	public Savings incrementBalance(Transaction tran);
+	public Transaction incrementBalance(Transaction tran);
 
-	public Savings decrementBalance(Transaction tran);
+	public Transaction decrementBalance(Transaction tran);
 
 	public Savings openSavings(Long id);
 

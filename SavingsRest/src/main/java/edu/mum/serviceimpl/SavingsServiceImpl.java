@@ -56,7 +56,7 @@ public class SavingsServiceImpl implements SavingsService {
 	}
 
 	@Override
-	public Savings incrementBalance(Transaction tran) {
+	public Transaction incrementBalance(Transaction tran) {
 
 		Savings s = savingsDao.findOne(tran.getSavings().getId());
 
@@ -100,11 +100,11 @@ public class SavingsServiceImpl implements SavingsService {
 
 		tranDao.save(tran);
 
-		return s;
+		return tran;
 	}
 
 	@Override
-	public Savings decrementBalance(Transaction tran) {
+	public Transaction decrementBalance(Transaction tran) {
 		Savings s = savingsDao.findOne(tran.getSavings().getId());
 
 		SysConfig sysConfig = sysConfigDao.getSysConfig();
@@ -146,7 +146,7 @@ public class SavingsServiceImpl implements SavingsService {
 
 		tranDao.save(tran);
 
-		return s;
+		return tran;
 	}
 
 	@Override

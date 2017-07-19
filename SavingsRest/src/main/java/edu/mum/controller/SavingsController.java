@@ -2,6 +2,7 @@ package edu.mum.controller;
 
 import java.util.List;
 
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.mum.amqp.TransactionMessageService;
 import edu.mum.domain.Balance;
+import edu.mum.domain.Customer;
 import edu.mum.domain.Savings;
 import edu.mum.domain.Transaction;
+import edu.mum.service.CustomerService;
 import edu.mum.service.SavingsService;
 
 @RestController
@@ -22,6 +26,15 @@ public class SavingsController {
 
 	@Autowired
 	private SavingsService savingsService;
+	
+	@Autowired
+	private TransactionMessageService messageService;
+	
+	@Autowired
+	private RabbitTemplate customerMessageTemplate;
+	
+	@Autowired
+	private CustomerService customerService;
 
 	@RequestMapping
 	public List<Savings> listSavings(Model model, @RequestParam(value = "customerId", required = false) Long id) {
@@ -52,33 +65,32 @@ public class SavingsController {
 	}
 
 	@RequestMapping(value = "/income", method = RequestMethod.POST)
-	public Savings processIncome(@RequestBody Transaction tran) {
-		Savings s = null;
+	public void processIncome(@RequestBody Transaction tran) {
+		Transaction t = null;
 		try {
-			s = savingsService.incrementBalance(tran);
-
+			t = savingsService.incrementBalance(tran);
+			Customer customer = customerService.findOne(t.getSavings().getCustomerId());
+			
+			messageService.publish(customerMessageTemplate, t, customer.getFullName());
 		} catch (Exception up) {
 			System.out.println("Income transaction Failed!!!");
 
 		}
 
-		return s;
-
 	}
 
 	@RequestMapping(value = "/withdraw", method = RequestMethod.POST)
-	public Savings processWithdraw(@RequestBody Transaction tran) {
-		Savings s = null;
+	public void processWithdraw(@RequestBody Transaction tran) {
+		Transaction t = null;
 		try {
-			s = savingsService.decrementBalance(tran);
-
+			t = savingsService.decrementBalance(tran);
+			Customer customer = customerService.findOne(t.getSavings().getCustomerId());
+			
+			messageService.publish(customerMessageTemplate, t, customer.getFullName());
 		} catch (Exception up) {
 			System.out.println("Withdraw transaction Failed!!!");
 
 		}
-
-		return s;
-
 	}
 
 	@RequestMapping(value = "/close", method = RequestMethod.POST)
