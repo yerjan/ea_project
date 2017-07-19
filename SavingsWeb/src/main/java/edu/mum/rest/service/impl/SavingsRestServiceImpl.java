@@ -37,14 +37,30 @@ public class SavingsRestServiceImpl implements SavingRestService {
 
 	public List<Transaction> tranListByAccountId(Long accountId) {
 		RestTemplate restTemplate = remoteApi.getRestTemplate();
-		return Arrays.asList(restTemplate.exchange("http://localhost:8080/SavingsRest/savings/transaction?accountId=" + accountId,
-				HttpMethod.GET, remoteApi.getHttpEntity(), Transaction[].class).getBody());
+		return Arrays.asList(
+				restTemplate.exchange("http://localhost:8080/SavingsRest/savings/transaction?accountId=" + accountId,
+						HttpMethod.GET, remoteApi.getHttpEntity(), Transaction[].class).getBody());
 	}
 
 	public Balance getActiveBalance(Long accountId) {
 		RestTemplate restTemplate = remoteApi.getRestTemplate();
 		return (restTemplate.exchange("http://localhost:8080/SavingsRest/savings/balance?accountId=" + accountId,
 				HttpMethod.GET, remoteApi.getHttpEntity(), Balance.class).getBody());
+	}
+
+	public Savings processIncome(Transaction tran) {
+		RestTemplate restTemplate = remoteApi.getRestTemplate();
+		HttpEntity<Transaction> httpEntity = new HttpEntity<Transaction>(tran, remoteApi.getHttpHeaders());
+		restTemplate.postForObject("http://localhost:8080/SavingsRest/savings/income/", httpEntity, Transaction.class);
+		return null;
+	}
+
+	public Savings processWithdraw(Transaction tran) {
+		RestTemplate restTemplate = remoteApi.getRestTemplate();
+		HttpEntity<Transaction> httpEntity = new HttpEntity<Transaction>(tran, remoteApi.getHttpHeaders());
+		restTemplate.postForObject("http://localhost:8080/SavingsRest/savings/withdraw/", httpEntity,
+				Transaction.class);
+		return null;
 	}
 
 	// public Customer save(Customer member) {

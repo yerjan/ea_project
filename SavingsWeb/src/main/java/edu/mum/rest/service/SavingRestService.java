@@ -14,9 +14,12 @@ public interface SavingRestService {
 	public Savings findOne(Long index);
 
 	public List<Savings> findByCustomerId(Long customerId);
-	
+
 	public List<Transaction> tranListByAccountId(Long accountId);
-	
+
 	public Balance getActiveBalance(Long index);
 
+	public Savings processIncome(Transaction tran);
+
+	public Savings processWithdraw(Transaction tran);
 }
