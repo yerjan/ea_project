@@ -26,13 +26,13 @@ public class SavingsController {
 
 	@Autowired
 	private SavingsService savingsService;
-	
+
 	@Autowired
 	private TransactionMessageService messageService;
-	
+
 	@Autowired
 	private RabbitTemplate customerMessageTemplate;
-	
+
 	@Autowired
 	private CustomerService customerService;
 
@@ -50,13 +50,14 @@ public class SavingsController {
 		return savingsService.findOne(id);
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
+	@RequestMapping(value = "/addSavings", method = RequestMethod.POST)
 	public Savings processAddNewSavingsForm(@RequestBody Savings savingsToBeAdded) {
 
 		try {
 			savingsService.save(savingsToBeAdded);
 		} catch (Exception up) {
-			System.out.println("transaction Failed!!!");
+			System.out.println("processAddNewSavingsForm Failed!!!");
+			System.out.println("processAddNewSavingsForm: " + up.getMessage());
 
 		}
 
@@ -70,12 +71,13 @@ public class SavingsController {
 		try {
 			t = savingsService.incrementBalance(tran);
 			Customer customer = customerService.findOne(t.getSavings().getCustomerId());
-			
+
 			messageService.publish(customerMessageTemplate, t, customer.getFullName());
 			return t;
 		} catch (Exception up) {
 			System.out.println("Income transaction Failed!!!");
-			
+			System.out.println("processIncome: " + up.getMessage());
+
 		}
 		return t;
 	}
@@ -86,32 +88,33 @@ public class SavingsController {
 		try {
 			t = savingsService.decrementBalance(tran);
 			Customer customer = customerService.findOne(t.getSavings().getCustomerId());
-			
+
 			messageService.publish(customerMessageTemplate, t, customer.getFullName());
 			return t;
 		} catch (Exception up) {
 			System.out.println("Withdraw transaction Failed!!!");
-
+			System.out.println("processWithdraw: " + up.getMessage());
 		}
 		return t;
 	}
 
-	@RequestMapping(value = "/close", method = RequestMethod.POST)
-	public Savings processClose(@RequestBody Savings savings) {
+	@RequestMapping(value = "/close", method = RequestMethod.GET)
+	public Savings processClose(Model model, @RequestParam(value = "accountId") Long id) {
 		Savings s = null;
 		try {
-			s = savingsService.closeSavings(savings.getId());
+			System.out.println("ID: " + id);
+			s = savingsService.closeSavings(id);
 
 		} catch (Exception up) {
 			System.out.println("Close transaction Failed!!!");
-
+			System.out.println("processClose: " + up.getMessage());
 		}
 
 		return s;
 
 	}
 
-	@RequestMapping(value = "/open", method = RequestMethod.POST)
+	@RequestMapping(value = "/open", method = RequestMethod.GET)
 	public Savings processOpen(Model model, @RequestParam(value = "accountId") Long id) {
 		Savings s = null;
 		try {
@@ -119,7 +122,7 @@ public class SavingsController {
 
 		} catch (Exception up) {
 			System.out.println("Open transaction Failed!!!");
-
+			System.out.println("processOpen: " + up.getMessage());
 		}
 
 		return s;

@@ -59,13 +59,13 @@ public class SavingsServiceImpl implements SavingsService {
 	public Transaction incrementBalance(Transaction tran) {
 		System.out.println("incrementBalance: " + tran.getAmount());
 		System.out.println("incrementBalance: " + tran.getDescription());
-		
+
 		Savings s = null;
 		try {
 			System.out.println("incrementBalance: " + tran.getSavings().getId());
 			s = savingsDao.findOne(tran.getSavings().getId());
 			System.out.println("savings: " + s.getName());
-			
+
 			SysConfig sysConfig = sysConfigDao.getSysConfig();
 			System.out.println("date: " + sysConfig.getSysDate());
 			tran.setTranDate(sysConfig.getSysDate());
@@ -73,7 +73,7 @@ public class SavingsServiceImpl implements SavingsService {
 			Balance b = balanceDao.findActiveBalance(tran.getSavings().getId());
 
 			System.out.println("Balance: " + b.getPrincipal());
-			
+
 			if (b == null) {
 				// balanceDao.updateBalanceStatus(s.getId());
 
@@ -171,7 +171,7 @@ public class SavingsServiceImpl implements SavingsService {
 
 		Savings s = savingsDao.findOne(id);
 		s.setStatus("OPEN");
-
+		savingsDao.update(s);
 		return s;
 	}
 
@@ -180,7 +180,7 @@ public class SavingsServiceImpl implements SavingsService {
 
 		Savings s = savingsDao.findOne(id);
 		s.setStatus("CLOSED");
-
+		savingsDao.update(s);
 		return s;
 	}
 

@@ -26,4 +26,6 @@ public interface SavingRestService {
 	public Savings processOpen(Long accountId);
 
 	public Savings processClose(Long accountId);
+	
+	public Savings addSavings(Savings savings);
 }

@@ -105,12 +105,12 @@ public class Savings implements Serializable {
 
 	@JsonIgnore
 	//@JsonBackReference
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "savings")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "savings")
 	private Set<Balance> balances = new HashSet<Balance>();
 
 	@JsonIgnore
 	//@JsonBackReference
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "savings")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "savings")
 	private Set<Transaction> transactions = new HashSet<Transaction>();
 
 	public Long getId() {
