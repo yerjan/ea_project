@@ -96,7 +96,7 @@ public class SavingsController {
 
 	}
 
-	@RequestMapping(value = "/open", method = RequestMethod.POST)
+	@RequestMapping(value = "/open", method = RequestMethod.GET)
 	public String processOpen(@RequestParam("accountId") Long id) {
 
 		Savings savings = savingsService.findOne(id);
@@ -107,13 +107,34 @@ public class SavingsController {
 
 	}
 
-	@RequestMapping(value = "/close", method = RequestMethod.POST)
+	@RequestMapping(value = "/close", method = RequestMethod.GET)
 	public String processClose(@RequestParam("accountId") Long id) {
 
+		System.out.println("Close: " + id);
 		Savings savings = savingsService.findOne(id);
 
 		Savings s = savingsService.processClose(id);
 
+		return "redirect:/savings/" + savings.getId();
+
+	}
+
+	@RequestMapping(value = "/addSavings", method = RequestMethod.GET)
+	public String getSavingsForm(@RequestParam("accountId") Long id, @ModelAttribute("newSavings") Savings newSavings) {
+
+		return "SavingsNew";
+	}
+
+	@RequestMapping(value = "/addSavings", method = RequestMethod.POST)
+	public String processSavingsForm(@ModelAttribute("newSavings") @Valid Savings savings, BindingResult result) {
+		System.out.println("processSavingsForm");
+		if (result.hasErrors()) {
+			return "SavingsNew";
+		}
+		System.out.println("processSavingsForm1");
+
+		Savings s = savingsService.addSavings(savings);
+		System.out.println("processSavingsForm4: ");
 		return "redirect:/savings/" + savings.getId();
 
 	}

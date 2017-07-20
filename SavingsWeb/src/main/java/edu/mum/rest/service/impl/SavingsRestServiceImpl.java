@@ -77,6 +77,13 @@ public class SavingsRestServiceImpl implements SavingRestService {
 
 	}
 
+	public Savings addSavings(Savings savings) {
+		RestTemplate restTemplate = remoteApi.getRestTemplate();
+		HttpEntity<Savings> httpEntity = new HttpEntity<Savings>(savings, remoteApi.getHttpHeaders());
+		restTemplate.postForObject("http://localhost:8080/SavingsRest/savings/addSavings/", httpEntity, Savings.class);
+		return null;
+	}
+
 	// public Customer save(Customer member) {
 	// RestTemplate restTemplate = remoteApi.getRestTemplate();
 	// HttpEntity<Customer> httpEntity = new HttpEntity<Customer>(member,

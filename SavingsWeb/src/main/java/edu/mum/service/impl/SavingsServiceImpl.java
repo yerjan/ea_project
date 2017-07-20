@@ -54,4 +54,9 @@ public class SavingsServiceImpl implements SavingsService {
 
 	}
 
+	public Savings addSavings(Savings savings) {
+		return savingRestService.addSavings(savings);
+
+	}
+
 }
