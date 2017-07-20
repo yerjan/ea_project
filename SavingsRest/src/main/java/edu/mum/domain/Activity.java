@@ -1,6 +1,8 @@
 package edu.mum.domain;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,8 +16,8 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "ASPECT")
-public class Aspect implements Serializable {
+@Table(name = "ACTIVITY")
+public class Activity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,9 +30,17 @@ public class Aspect implements Serializable {
 	@Column(name = "USER", nullable = false)
 	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	@JoinColumn(name = "USER_ID")
-	private Person user;	 
+	private Staff user;	 
 
 	private Date datetime;
+	public Date getDatetime() {
+		return datetime;
+	}
+
+	public void setDatetime(Date datetime) {
+		this.datetime = datetime;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -53,7 +63,7 @@ public class Aspect implements Serializable {
 		return user;
 	}
 
-	public void setUser(Person person) {
+	public void setUser(Staff person) {
 		this.user = person;
 	}
 

@@ -8,7 +8,6 @@ import edu.mum.domain.Savings;
 import edu.mum.domain.Transaction;
 
 public interface SavingsService {
-
 	public void save(Savings savings);
 
 	public List<Savings> findAll();
