@@ -9,33 +9,61 @@
 <title>Savings Detail</title>
 </head>
 <body>
-	
+
 	<div class="container">
 
 		<div class="subtitle">
 			Savings Information
 			<div>
-				<a href="#" class='btn btn-primary'>Open</a>
-				<a href="#" class='btn btn-primary'>Close</a>
+				<a
+					href="<spring:url value="/savings/open?accountId=${savings.id}"/>"
+					class='btn btn-primary'>Open</a> <a
+					href="<spring:url value="/savings/close?accountId=${savings.id}"/>"
+					class='btn btn-primary'>Close</a>
+
 			</div>
 		</div>
 		<div class='detail-container'>
 			<fieldset>
-				<div class='form-group'><label class='col-sm-4 control-label'>Account id:</label> <div>${savings.id} </div></div>
-				<div class='form-group'><label class='col-sm-4 control-label'>Name:</label> <div>${savings.name}</div></div>
-				<div class='form-group'><label class='col-sm-4 control-label'>Start Date:</label> <div>${savings.startDate}</div></div>
-				<div class='form-group'><label class='col-sm-4 control-label'>End Date:</label> <div>${savings.endDate}</div></div>
-				<div class='form-group'><label class='col-sm-4 control-label'>Principal:</label> <div>${balance.principal}</div></div>
-				<div class='form-group'><label class='col-sm-4 control-label'>Interest:</label> <div>${balance.interest}</div></div>
-				<div class='form-group'><label class='col-sm-4 control-label'>Status:</label> <div>${savings.status}</div></div>
+				<div class='form-group'>
+					<label class='col-sm-4 control-label'>Account id:</label>
+					<div>${savings.id}</div>
+				</div>
+				<div class='form-group'>
+					<label class='col-sm-4 control-label'>Name:</label>
+					<div>${savings.name}</div>
+				</div>
+				<div class='form-group'>
+					<label class='col-sm-4 control-label'>Start Date:</label>
+					<div>${savings.startDate}</div>
+				</div>
+				<div class='form-group'>
+					<label class='col-sm-4 control-label'>End Date:</label>
+					<div>${savings.endDate}</div>
+				</div>
+				<div class='form-group'>
+					<label class='col-sm-4 control-label'>Principal:</label>
+					<div>${balance.principal}</div>
+				</div>
+				<div class='form-group'>
+					<label class='col-sm-4 control-label'>Interest:</label>
+					<div>${balance.interest}</div>
+				</div>
+				<div class='form-group'>
+					<label class='col-sm-4 control-label'>Status:</label>
+					<div>${savings.status}</div>
+				</div>
 			</fieldset>
 		</div>
 
 		<div class="subtitle">
 			Transactions
 			<div>
-				<a href="#" class='btn btn-primary'>Income</a>
-				<a href="#" class='btn btn-primary'>Withdraw</a>
+				<a
+					href="<spring:url value="/savings/income?accountId=${savings.id}"/>"
+					class='btn btn-primary'>Income</a> <a
+					href="<spring:url value="/savings/withdraw?accountId=${savings.id}"/>"
+					class='btn btn-primary'>Withdraw</a>
 			</div>
 
 		</div>
@@ -54,7 +82,7 @@
 			<tbody>
 				<c:forEach items="#{transactions}" var="tran">
 					<tr>
-						<td>${tran.id}</td> 
+						<td>${tran.id}</td>
 						<td>${tran.currency}</td>
 						<td>${tran.amount}</td>
 						<td>${tran.description}</td>
@@ -62,38 +90,43 @@
 
 					</tr>
 				</c:forEach>
-				
+
 			</tbody>
 		</table>
 	</div>
-	
+
 	<style type="text/css">
-		.subtitle{
-			margin-top: 20px;
-			font-size: 28px;
-			border-left: 4px solid orange;
-			padding-left: 5px;
-		}
-		.subtitle a{ margin-left: 10px; float: right;}
-		.subtitle div{float: right;}
+.subtitle {
+	margin-top: 20px;
+	font-size: 28px;
+	border-left: 4px solid orange;
+	padding-left: 5px;
+}
 
+.subtitle a {
+	margin-left: 10px;
+	float: right;
+}
 
-		.detail-container{
-			padding: 20px;
-			margin-top: 10px;
-			background-color: #eee;
-		}
+.subtitle div {
+	float: right;
+}
 
-		fieldset > .form-group{
-			width: 600px;
-			font-size: 18px;
-		}
+.detail-container {
+	padding: 20px;
+	margin-top: 10px;
+	background-color: #eee;
+}
 
-		fieldset .form-group > div{
-			color: #000066;
-			font-weight: bold;
-		}
+fieldset>.form-group {
+	width: 600px;
+	font-size: 18px;
+}
 
-	</style>
+fieldset .form-group>div {
+	color: #000066;
+	font-weight: bold;
+}
+</style>
 </body>
 </html>

@@ -12,8 +12,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -53,22 +51,6 @@ public class Savings implements Serializable {
 	@Temporal(TemporalType.DATE)
 	@Column(name = "START_DATE", nullable = false)
 	private Date startDate;
-	
-	@Future
-	@Column(name = "END_DATE", nullable = false)
-	private Date endDate;
-
-	@JsonBackReference
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name="CUSTOMER_ID")
-	private Customer customer;
-
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "savings")
-	private Set<Balance> balances = new HashSet<Balance>();
-
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, mappedBy = "savings")
-	private Set<Transaction> transactions = new HashSet<Transaction>();
-
 
 	public Double getInterestRate() {
 		return interestRate;
@@ -94,6 +76,14 @@ public class Savings implements Serializable {
 		this.endDate = endDate;
 	}
 
+	public Long getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
+
 	public Set<Transaction> getTransactions() {
 		return transactions;
 	}
@@ -106,7 +96,23 @@ public class Savings implements Serializable {
 		return serialVersionUID;
 	}
 
-	
+	@Future
+	@Column(name = "END_DATE", nullable = false)
+	private Date endDate;
+
+	@Column(name = "CUSTOMER_ID", nullable = false)
+	private Long customerId;
+
+	//@JsonIgnore
+	//@JsonBackReference
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "savings")
+	private Set<Balance> balances = new HashSet<Balance>();
+
+	//@JsonIgnore
+	//@JsonBackReference
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "savings")
+	private Set<Transaction> transactions = new HashSet<Transaction>();
+
 	public Long getId() {
 		return id;
 	}
@@ -121,14 +127,6 @@ public class Savings implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-	
-	public Customer getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
 	}
 
 	public String getStatus() {

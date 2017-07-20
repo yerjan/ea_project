@@ -1,4 +1,4 @@
-package edu.mum.dao.impl;
+  package edu.mum.dao.impl;
 
 import javax.persistence.Query;
 
@@ -17,7 +17,7 @@ public class SysConfigDaoImpl extends GenericDaoImpl<SysConfig> implements SysCo
 
 	public SysConfig getSysConfig() {
 
-		Query query = entityManager.createQuery("select u from SysConfig ");
+		Query query = entityManager.createQuery("select u from SysConfig u ");
 		return (SysConfig) query.getSingleResult();
 
 	}

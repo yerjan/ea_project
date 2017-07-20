@@ -56,29 +56,26 @@ public class SavingsServiceImpl implements SavingsService {
 	}
 
 	@Override
-	public Savings incrementBalance(Transaction tran) {
+	public Transaction incrementBalance(Transaction tran) {
+		System.out.println("incrementBalance: " + tran.getAmount());
+		System.out.println("incrementBalance: " + tran.getDescription());
+		
+		Savings s = null;
+		try {
+			System.out.println("incrementBalance: " + tran.getSavings().getId());
+			s = savingsDao.findOne(tran.getSavings().getId());
+			System.out.println("savings: " + s.getName());
+			
+			SysConfig sysConfig = sysConfigDao.getSysConfig();
+			System.out.println("date: " + sysConfig.getSysDate());
+			tran.setTranDate(sysConfig.getSysDate());
 
-		Savings s = savingsDao.findOne(tran.getSavings().getId());
+			Balance b = balanceDao.findActiveBalance(tran.getSavings().getId());
 
-		SysConfig sysConfig = sysConfigDao.getSysConfig();
-		tran.setTranDate(sysConfig.getSysDate());
-
-		Balance b = balanceDao.findActiveBalance(tran.getSavings().getId());
-
-		if (b == null) {
-			// balanceDao.updateBalanceStatus(s.getId());
-
-			Balance b1 = new Balance();
-			b1.setInterest(new BigDecimal(0));
-			b1.setPrincipal(tran.getAmount());
-			b1.setSavings(s);
-			b1.setStatus(0);
-			b1.setValueDate(sysConfig.getSysDate());
-			balanceDao.save(b);
-
-		} else {
-			if (sysConfig.getSysDate().compareTo(b.getValueDate()) != 0) {
-				b.setStatus(1);
+			System.out.println("Balance: " + b.getPrincipal());
+			
+			if (b == null) {
+				// balanceDao.updateBalanceStatus(s.getId());
 
 				Balance b1 = new Balance();
 				b1.setInterest(new BigDecimal(0));
@@ -89,22 +86,41 @@ public class SavingsServiceImpl implements SavingsService {
 				balanceDao.save(b);
 
 			} else {
-				b.setPrincipal(b.getPrincipal().add(tran.getAmount()));
-				b.setValueDate(sysConfig.getSysDate());
-				balanceDao.update(b);
+				if (sysConfig.getSysDate().compareTo(b.getValueDate()) != 0) {
+					b.setStatus(1);
+					System.out.println("Differen: " + b.getPrincipal());
+					Balance b1 = new Balance();
+					b1.setInterest(new BigDecimal(0));
+					b1.setPrincipal(tran.getAmount());
+					b1.setSavings(s);
+					b1.setStatus(0);
+					b1.setValueDate(sysConfig.getSysDate());
+					balanceDao.save(b);
+
+				} else {
+					System.out.println("Not Differen: " + b.getPrincipal());
+					b.setPrincipal(b.getPrincipal().add(tran.getAmount()));
+					b.setValueDate(sysConfig.getSysDate());
+					System.out.println("Before update: " + b.getPrincipal());
+					balanceDao.update(b);
+					System.out.println("After update: " + b.getPrincipal());
+				}
 			}
+
+			tran.setCurrency(s.getCurrency());
+			tran.setType("INCOME");
+			System.out.println("Before save: " + b.getPrincipal());
+			tranDao.save(tran);
+			System.out.println("After save: " + b.getPrincipal());
+		} catch (Exception up) {
+			System.out.println("incrementBalance transaction Failed!!!");
+			System.out.println(": " + up.getMessage());
 		}
-
-		tran.setCurrency(s.getCurrency());
-		tran.setType("INCOME");
-
-		tranDao.save(tran);
-
-		return s;
+		return tran;
 	}
 
 	@Override
-	public Savings decrementBalance(Transaction tran) {
+	public Transaction decrementBalance(Transaction tran) {
 		Savings s = savingsDao.findOne(tran.getSavings().getId());
 
 		SysConfig sysConfig = sysConfigDao.getSysConfig();
@@ -147,7 +163,7 @@ public class SavingsServiceImpl implements SavingsService {
 
 		tranDao.save(tran);
 
-		return s;
+		return tran;
 	}
 
 	@Override

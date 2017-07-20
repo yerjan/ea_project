@@ -6,17 +6,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link rel="stylesheet"
 	href="<spring:url value="/resource/bootstrap-3.3.7-dist/css/bootstrap.min.css"  htmlEscape="true" />">
-<title>Income transaction</title>
+<title>Withdraw</title>
 </head>
 <body>
 
-	<div class="subtitle">Income transaction</div>
+	<div class="subtitle">Withdraw transaction</div>
 
 	<div class="detail-container">
 		<section class="container">
 			<form:form modelAttribute="newTransaction" class="form-horizontal">
 				<fieldset>
-					<legend>Make income</legend>
+					<legend>Make withdraw</legend>
 
 					<form:errors path="*" cssClass="alert alert-danger" element="div" />
 

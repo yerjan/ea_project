@@ -40,60 +40,9 @@ import edu.mum.domain.Transaction;
 			
 		}
 	
+}
 	
 	
 	
 	
 	
-	/*
-	//@Componet
-	//@Pointcut("execution(* edu.mum.service..save(..)) && args(order) ")
-	
-		@Pointcut("execution(* edu.mum.service..*(..))")
-		public void depositOrWithdraw() {
-		}
-
-		@Pointcut("execution(* edu.mum.service..*(..))")
-		public void transferFund() {
-		}
-		@Pointcut("execution(*edu.mum.service.*savingService.*(..))")
-
-		@After("depositOrWithdraw()")
-		public void logDepositOrWithdrawTransaction(JoinPoint joinPoint) {
-			try {
-				logTransaction(joinPoint);
-				
-			} catch (Throwable e) {
-				System.out.println("Exception Thrown");
-				e.printStackTrace();
-			}
-		}
-
-		
-		
-		//@Around("")
-		
-		//can apply in different method by usng @Logable
-		//@Before("@annotation(edu.mum.aspect.Loggable)")
-		
-		@After(" /") //transferFund()
-		public void logTransferFundTransaction(JoinPoint joinPoint) {
-			try {
-				logTransaction(joinPoint);
-				
-			} catch (Throwable e) {
-				System.out.println("Exception Thrown");
-				e.printStackTrace();
-			}
-		}
-
-		private void logTransaction(JoinPoint joinPoint) {
-			System.out.println("===========LoggingAspect==logResource(JoinPoint joinPoint)===========");
-			Logger log = Logger.getLogger("");
-			log.info("   **********     TARGET CLASS : " + joinPoint.getSignature().getName() + "    **********");
-			System.out.println();
-			System.out.println("   **********     TARGET CLASS : " + joinPoint.getSignature().getDeclaringTypeName() + "."
-					+ joinPoint.getSignature().getName() + "    **********");
-		}*/
-
-	}

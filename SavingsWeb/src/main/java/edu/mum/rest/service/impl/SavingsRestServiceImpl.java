@@ -58,9 +58,23 @@ public class SavingsRestServiceImpl implements SavingRestService {
 	public Savings processWithdraw(Transaction tran) {
 		RestTemplate restTemplate = remoteApi.getRestTemplate();
 		HttpEntity<Transaction> httpEntity = new HttpEntity<Transaction>(tran, remoteApi.getHttpHeaders());
-		restTemplate.postForObject("http://localhost:8080/SavingsRest/savings/withdraw/", httpEntity,
-				Transaction.class);
+		restTemplate.postForObject("http://localhost:8080/SavingsRest/savings/income/", httpEntity, Transaction.class);
 		return null;
+	}
+
+	public Savings processOpen(Long accountId) {
+
+		RestTemplate restTemplate = remoteApi.getRestTemplate();
+		return (restTemplate.exchange("http://localhost:8080/SavingsRest/savings/open?accountId=" + accountId,
+				HttpMethod.GET, remoteApi.getHttpEntity(), Savings.class).getBody());
+
+	}
+
+	public Savings processClose(Long accountId) {
+		RestTemplate restTemplate = remoteApi.getRestTemplate();
+		return (restTemplate.exchange("http://localhost:8080/SavingsRest/savings/close?accountId=" + accountId,
+				HttpMethod.GET, remoteApi.getHttpEntity(), Savings.class).getBody());
+
 	}
 
 	// public Customer save(Customer member) {

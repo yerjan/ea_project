@@ -5,12 +5,15 @@
 	xmlns:context="http://www.springframework.org/schema/context"
    xmlns:tx="http://www.springframework.org/schema/tx"
    xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+   xmlns:rabbit="http://www.springframework.org/schema/rabbit"
     xsi:schemaLocation="
       http://www.springframework.org/schema/beans 
       http://www.springframework.org/schema/beans/spring-beans.xsd
  	  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-      http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+      http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+      http://www.springframework.org/schema/rabbit
+      http://www.springframework.org/schema/rabbit/spring-rabbit.xsd">
  
   
  <context:property-placeholder location="classpath:application.properties" />
@@ -56,6 +59,33 @@
    <bean id="persistenceExceptionTranslationPostProcessor"
       class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
  
-
+<!-- Messaging goes here! -->
+	<rabbit:connection-factory id="connectionFactory" host="localhost" username="joe" password="joe"/>
  
+    <rabbit:admin connection-factory="connectionFactory" />
+
+	<!-- ******************* TOPIC *************************** -->
+    <rabbit:queue name="customerTransaction" />
+
+    <rabbit:topic-exchange name="order">
+        <rabbit:bindings>
+            <rabbit:binding queue="customerTransaction" pattern="customer.activity.#" />
+         </rabbit:bindings>
+    </rabbit:topic-exchange>
+    
+    
+    <!-- ******************* Producer *************************** -->
+    <rabbit:template id="customerMessageTemplate" connection-factory="connectionFactory"
+                     reply-timeout="2000" routing-key="customer.activity"
+                     exchange="order" />
+                     
+                     
+                     
+                     
+    <rabbit:listener-container connection-factory="connectionFactory">
+		<rabbit:listener ref="queueListener" method="listen" queue-names="customerTransaction" />
+	</rabbit:listener-container>
+	
+	<bean id="queueListener" class="edu.mum.amqp.TransactionListener" />
+<!-- Messaging END here! -->
 </beans>
