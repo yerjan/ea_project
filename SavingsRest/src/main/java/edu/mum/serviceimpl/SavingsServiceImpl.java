@@ -114,6 +114,7 @@ public class SavingsServiceImpl implements SavingsService {
 		if (b == null) {
 			// balanceDao.updateBalanceStatus(s.getId());
 
+			
 			Balance b1 = new Balance();
 			b1.setInterest(new BigDecimal(0));
 			b1.setPrincipal(tran.getAmount());

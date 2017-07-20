@@ -28,7 +28,10 @@ public class AccountChangeAspect {
 			@Pointcut("execution(* edu.mum.service..*(..))")
 			public void transferFund() {
 			}
-
+			//lememaria
+			@Pointcut("execution(* edu.mum.service..save(..))")
+           public void savechange(){}
+           
 			@After("depositOrWithdraw() && args(savings, amount)")
 			public void logDepositOrWithdrawTransaction(JoinPoint joinPoint, Savings saving, Double amount) {
 				try {
