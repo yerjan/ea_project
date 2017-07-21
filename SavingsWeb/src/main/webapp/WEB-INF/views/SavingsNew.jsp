@@ -17,19 +17,32 @@
 
 
 			<section class="container">
-				<form:form modelAttribute="newTransaction" class="form-horizontal">
+				<form:form modelAttribute="newSavings" class="form-horizontal">
 					<fieldset>
 						<legend>Make income</legend>
 
 						<form:errors path="*" cssClass="alert alert-danger" element="div" />
 
 						<div class="form-group">
-							<label for="accountName" class="col-sm-2 control-label">Name</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control" id="accountName"
-									name="name" placeholder="Name">
+							<label class="control-label col-lg-2" for="customerId">Customer</label>
+							<div class="col-lg-10">
+								<form:input id="customer" path="customerId" type="text"
+									class="form:input-large" />
+								<form:errors path="customerId" cssClass="text-danger" />
 							</div>
 						</div>
+
+						<div class="form-group">
+							<label for="accountName" class="col-sm-2 control-label">Name</label>
+
+							<div class="col-lg-10">
+								<form:input id="name" path="name" type="text"
+									class="form:input-large" />
+								<form:errors path="name" cssClass="text-danger" />
+							</div>
+
+						</div>
+
 						<div class="form-group">
 							<label for="currency" class="col-sm-2 control-label">Currency</label>
 							<div class="col-sm-10">
@@ -45,10 +58,10 @@
 							<label for="interestRate" class="col-sm-2 control-label">Interest
 								Rate</label>
 							<div class="col-sm-10">
-								<select id="currency" class="form-control" name="currency">
-									<option>2% annual</option>
-									<option>5% annual</option>
-									<option>9% annual</option>
+								<select id="currency" class="form-control" name="interestRate">
+									<option value=2>2% annual</option>
+									<option value=5>5% annual</option>
+									<option value=9>9% annual</option>
 								</select>
 							</div>
 						</div>
@@ -57,16 +70,18 @@
 							<label for="startDate" class="col-sm-2 control-label">Start
 								Date</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="startDate"
-									name="startDate" placeholder="MM/DD/YYYY">
+								<input type="date" class="form-control" id="startDate"
+									name="startDate" >
 							</div>
+
+
 						</div>
 						<div class="form-group">
 							<label for="endDate" class="col-sm-2 control-label">Interest
-								Rate</label>
+								End date</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="endDate"
-									name="endDate" placeholder="MM/DD/YYYY">
+								<input type="date" class="form-control" id="endDate"
+									name="endDate" >
 							</div>
 						</div>
 

@@ -126,7 +126,7 @@ public class SavingsController {
 	}
 
 	@RequestMapping(value = "/addSavings", method = RequestMethod.POST)
-	public String processSavingsForm(@ModelAttribute("newSavings") @Valid Savings savings, BindingResult result) {
+	public String processSavingsForm(@RequestParam("accountId") Long id,@ModelAttribute("newSavings") @Valid Savings savings, BindingResult result) {
 		System.out.println("processSavingsForm");
 		if (result.hasErrors()) {
 			return "SavingsNew";
@@ -135,7 +135,7 @@ public class SavingsController {
 
 		Savings s = savingsService.addSavings(savings);
 		System.out.println("processSavingsForm4: ");
-		return "redirect:/savings/" + savings.getId();
+		return "redirect:/savings/" + id;
 
 	}
 

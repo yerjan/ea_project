@@ -97,6 +97,7 @@ public class Savings implements Serializable {
 	}
 
 	@Future
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "END_DATE", nullable = false)
 	private Date endDate;
 
