@@ -9,10 +9,11 @@ import org.springframework.transaction.annotation.Transactional;
 import edu.mum.dao.StaffDao;
 import edu.mum.domain.Staff;
 import edu.mum.service.StaffCredentialsService;
+import edu.mum.service.StaffService;
 
 @Service
 @Transactional
-public class StaffServiceImpl implements edu.mum.service.StaffService {
+public class StaffServiceImpl implements StaffService {
 
 	@Autowired
 	private StaffDao staffDao;

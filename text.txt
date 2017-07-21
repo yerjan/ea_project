@@ -1,0 +1,23 @@
+DB schema create with name Azaz
+
+WEB
+  ORM
+    validation with relation?
+  create account/update
+  login session?
+
+REST
+ORM
+  1. validation
+  2. relation all lazy
+  3. role
+        - fail? best case app.
+Aspect
+  1. staff
+  2. event          OK
+  3. params
+Security (login)
+  bhgui
+Batch
+Messaging
+  - review

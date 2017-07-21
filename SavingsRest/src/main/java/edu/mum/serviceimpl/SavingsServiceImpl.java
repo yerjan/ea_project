@@ -33,21 +33,12 @@ public class SavingsServiceImpl implements SavingsService {
 	@Autowired
 	private SysConfigDao sysConfigDao;
 
-	public void save(Savings savings) {
-		savingsDao.save(savings);
-	}
-
 	public List<Savings> findAll() {
 		return (List<Savings>) savingsDao.findAll();
 	}
 
 	public List<Savings> findByCustomer(Long customerId) {
 		return (List<Savings>) savingsDao.findByCustomer(customerId);
-	}
-
-	public Savings update(Savings savings) {
-		return savingsDao.update(savings);
-
 	}
 
 	@Override
@@ -167,22 +158,12 @@ public class SavingsServiceImpl implements SavingsService {
 	}
 
 	@Override
-	public Savings openSavings(Long id) {
-
-		Savings s = savingsDao.findOne(id);
-		s.setStatus("OPEN");
-		savingsDao.update(s);
-		return s;
+	public Savings createSavings(Savings savings) {
+		savingsDao.save(savings);
+		return savings;
 	}
 
-	@Override
-	public Savings closeSavings(Long id) {
 
-		Savings s = savingsDao.findOne(id);
-		s.setStatus("CLOSED");
-		savingsDao.update(s);
-		return s;
-	}
 
 	@Override
 	public List<Transaction> listTransaction(Long id) {

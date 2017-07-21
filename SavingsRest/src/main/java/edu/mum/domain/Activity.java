@@ -1,6 +1,8 @@
 package edu.mum.domain;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,23 +16,41 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "ASPECT")
-public class Aspect implements Serializable {
+@Table(name = "ACTIVITY")
+public class Activity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ASPECT_ID")
 	private Long id = null;
-
+	
+	@Column(name = "USER_ID", nullable=false)
+	private Long userId;
+	
 	@Column(name = "EVENT", nullable = false)
 	private String event;
-
-	@Column(name = "USER", nullable = false)
-	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinColumn(name = "USER_ID")
-	private Person user;	 
+	
+	@Column(name = "DATA")
+	private String data;
 
 	private Date datetime;
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
+	public Date getDatetime() {
+		return datetime;
+	}
+
+	public void setDatetime(Date datetime) {
+		this.datetime = datetime;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -47,14 +67,12 @@ public class Aspect implements Serializable {
 		this.event = event;
 	}
 
-	
-
-	public Person getUser() {
-		return user;
+	public Long getUser() {
+		return userId;
 	}
 
-	public void setUser(Person person) {
-		this.user = person;
+	public void setUser(Long userId) {
+		this.userId = userId;
 	}
 
 }
