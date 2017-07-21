@@ -16,10 +16,10 @@ public interface SavingsService {
 	public Savings findOne(Long id);
 
 	//AOP
-	public Transaction incrementBalance(Transaction tran);
+	public Transaction incrementBalance(Transaction transaction);
 	
 	//AOP
-	public Transaction decrementBalance(Transaction tran);
+	public Transaction decrementBalance(Transaction transaction);
 
 	//AOP
 	public Savings createSavings(Savings newSavig);

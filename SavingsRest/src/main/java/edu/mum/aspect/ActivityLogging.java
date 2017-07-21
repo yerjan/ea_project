@@ -30,19 +30,20 @@ public class ActivityLogging{
 	@Pointcut("execution(* edu.mum.service.SavingsService.createSavings)")
 	public void createSavings(){}
 	
-	@Pointcut("execution(* edu.mum.service.SavingsService.incrementBalance(..))")
-	public void incrementBalance(){}
+	@Pointcut("execution(* edu.mum.service.SavingsService.incrementBalance(transaction))")
+	public void incrementBalance(Transaction transaction){}
 	
-	@Pointcut("execution(* edu.mum.service.SavingsService.decrementBalance(..))")
-	public void decrementBalance(){}
+	@Pointcut("execution(* edu.mum.service.SavingsService.decrementBalance(transaction))")
+	public void decrementBalance(Transaction transaction){}
 	
 	
 
-	@Before("incrementBalance() && decrementBalance()")
-	public void save(Savings savings){
+	@Before("incrementBalance(transaction) && decrementBalance(transaction)")
+	public void save(Transaction transaction){
 		Activity activity = new Activity();
 		activity.setUser((long) 1);
 		activity.setEvent("Withdraw balance");
+		activity.setData("Type: " + transaction.getType() + ", Amount: " + transaction.getAmount());
 		
 		activityService.save(activity);
 	}
