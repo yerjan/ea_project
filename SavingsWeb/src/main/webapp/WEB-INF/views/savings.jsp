@@ -15,11 +15,7 @@
 		<div class="subtitle">
 			Savings Information
 			<div>
-				<a
-					href="<spring:url value="/savings/open?accountId=${savings.id}"/>"
-					class='btn btn-primary'>Open</a> <a
-					href="<spring:url value="/savings/close?accountId=${savings.id}"/>"
-					class='btn btn-primary'>Close</a>
+				
 
 			</div>
 		</div>
