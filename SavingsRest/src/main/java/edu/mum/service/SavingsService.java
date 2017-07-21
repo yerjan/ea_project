@@ -8,24 +8,21 @@ import edu.mum.domain.Savings;
 import edu.mum.domain.Transaction;
 
 public interface SavingsService {
-	public void save(Savings savings);
 
 	public List<Savings> findAll();
 
 	public List<Savings> findByCustomer(Long customerId);
 
 	public Savings findOne(Long id);
-	
-	//Aop
-	public Savings update(Savings user);
 
+	//AOP
 	public Transaction incrementBalance(Transaction tran);
-
+	
+	//AOP
 	public Transaction decrementBalance(Transaction tran);
 
-	public Savings openSavings(Long id);
-
-	public Savings closeSavings(Long id);
+	//AOP
+	public Savings createSavings(Savings newSavig);
 
 	public List<Transaction> listTransaction(Long id);
 

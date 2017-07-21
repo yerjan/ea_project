@@ -23,16 +23,26 @@ public class Activity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ASPECT_ID")
 	private Long id = null;
-
+	
+	@Column(name = "USER_ID", nullable=false)
+	private Long userId;
+	
 	@Column(name = "EVENT", nullable = false)
 	private String event;
-
-	@Column(name = "USER", nullable = false)
-	@ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinColumn(name = "USER_ID")
-	private Staff user;	 
+	
+	@Column(name = "DATA")
+	private String data;
 
 	private Date datetime;
+
+	public String getData() {
+		return data;
+	}
+
+	public void setData(String data) {
+		this.data = data;
+	}
+
 	public Date getDatetime() {
 		return datetime;
 	}
@@ -57,14 +67,12 @@ public class Activity implements Serializable {
 		this.event = event;
 	}
 
-	
-
-	public Person getUser() {
-		return user;
+	public Long getUser() {
+		return userId;
 	}
 
-	public void setUser(Staff person) {
-		this.user = person;
+	public void setUser(Long userId) {
+		this.userId = userId;
 	}
 
 }

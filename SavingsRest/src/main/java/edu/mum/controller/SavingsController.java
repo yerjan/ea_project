@@ -54,7 +54,7 @@ public class SavingsController {
 	public Savings processAddNewSavingsForm(@RequestBody Savings savingsToBeAdded) {
 
 		try {
-			savingsService.save(savingsToBeAdded);
+			savingsService.createSavings(savingsToBeAdded);
 		} catch (Exception up) {
 			System.out.println("processAddNewSavingsForm Failed!!!");
 			System.out.println("processAddNewSavingsForm: " + up.getMessage());
@@ -97,46 +97,6 @@ public class SavingsController {
 		}
 		return t;
 	}
-
-	@RequestMapping(value = "/close", method = RequestMethod.GET)
-	public Savings processClose(Model model, @RequestParam(value = "accountId") Long id) {
-		Savings s = null;
-		try {
-			System.out.println("ID: " + id);
-			s = savingsService.closeSavings(id);
-
-		} catch (Exception up) {
-			System.out.println("Close transaction Failed!!!");
-			System.out.println("processClose: " + up.getMessage());
-		}
-
-		return s;
-
-	}
-
-	@RequestMapping(value = "/open", method = RequestMethod.GET)
-	public Savings processOpen(Model model, @RequestParam(value = "accountId") Long id) {
-		Savings s = null;
-		try {
-			s = savingsService.openSavings(id);
-
-		} catch (Exception up) {
-			System.out.println("Open transaction Failed!!!");
-			System.out.println("processOpen: " + up.getMessage());
-		}
-
-		return s;
-
-	}
-
-	// www.something.com/customers/
-	// www.something.com/customers?age=5
-	// www.something.com/customers/5
-
-	// www.something.com/savings?customerId=5
-	// www.something.com/savings/5
-
-	// www.something.com//
 
 	@RequestMapping(value = "/transaction")
 	public List<Transaction> listTranByAccount(Model model, @RequestParam(value = "accountId") Long id) {
