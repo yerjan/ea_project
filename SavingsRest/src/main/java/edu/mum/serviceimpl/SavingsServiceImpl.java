@@ -75,7 +75,7 @@ public class SavingsServiceImpl implements SavingsService {
 				b1.setSavings(s);
 				b1.setStatus(0);
 				b1.setValueDate(sysConfig.getSysDate());
-				balanceDao.save(b);
+				balanceDao.save(b1);
 
 			} else {
 				if (sysConfig.getSysDate().compareTo(b.getValueDate()) != 0) {
@@ -83,11 +83,11 @@ public class SavingsServiceImpl implements SavingsService {
 					System.out.println("Differen: " + b.getPrincipal());
 					Balance b1 = new Balance();
 					b1.setInterest(new BigDecimal(0));
-					b1.setPrincipal(tran.getAmount());
+					b1.setPrincipal(tran.getAmount().add(b.getPrincipal()));
 					b1.setSavings(s);
 					b1.setStatus(0);
 					b1.setValueDate(sysConfig.getSysDate());
-					balanceDao.save(b);
+					balanceDao.save(b1);
 
 				} else {
 					System.out.println("Not Differen: " + b.getPrincipal());
@@ -107,6 +107,7 @@ public class SavingsServiceImpl implements SavingsService {
 		} catch (Exception up) {
 			System.out.println("incrementBalance transaction Failed!!!");
 			System.out.println(": " + up.getMessage());
+			up.printStackTrace(System.out);
 		}
 		return tran;
 	}
@@ -122,7 +123,6 @@ public class SavingsServiceImpl implements SavingsService {
 		if (b == null) {
 			// balanceDao.updateBalanceStatus(s.getId());
 
-			
 			Balance b1 = new Balance();
 			b1.setInterest(new BigDecimal(0));
 			b1.setPrincipal(tran.getAmount());
@@ -172,8 +172,6 @@ public class SavingsServiceImpl implements SavingsService {
 		return savings;
 	}
 
-
-
 	@Override
 	public List<Transaction> listTransaction(Long id) {
 
@@ -196,22 +194,23 @@ public class SavingsServiceImpl implements SavingsService {
 		cal.setTime(sysConfig.getSysDate());
 		cal.add(Calendar.DATE, 1);
 		sysConfig.setSysDate(cal.getTime());
+		sysConfigDao.update(sysConfig);
 
 		// assuming interest is calculated
 		BigDecimal interest = new BigDecimal(10);
-		
+
 		List<Savings> list = savingsDao.findAll();
-		for(Savings savings : list){
+		for (Savings savings : list) {
 			Transaction transaction = new Transaction();
 			transaction.setAmount(interest);
 			transaction.setCurrency(savings.getCurrency());
 			transaction.setDescription("INTEREST");
 			transaction.setType("INCOME");
 			transaction.setSavings(savings);
-			
+
 			incrementBalance(transaction);
 		}
-		
+
 	}
 
 }
