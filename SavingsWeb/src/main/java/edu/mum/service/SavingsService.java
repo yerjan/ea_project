@@ -20,10 +20,6 @@ public interface SavingsService {
 	public Savings processIncome(Transaction tran);
 
 	public Savings processWithdraw(Transaction tran);
-
-	public Savings processOpen(Long accountId);
-
-	public Savings processClose(Long accountId);
 	
 	public Savings addSavings(Savings savings);
 }

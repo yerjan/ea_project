@@ -14,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-
 @Entity
 @Table(name = "ACTIVITY")
 public class Activity implements Serializable {
@@ -23,13 +22,13 @@ public class Activity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ASPECT_ID")
 	private Long id = null;
-	
-	@Column(name = "USER_ID", nullable=false)
+
+	@Column(name = "USER_ID", nullable = false)
 	private Long userId;
-	
+
 	@Column(name = "EVENT", nullable = false)
 	private String event;
-	
+
 	@Column(name = "DATA")
 	private String data;
 

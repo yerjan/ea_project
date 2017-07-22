@@ -30,7 +30,6 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Customer update(Customer user) {
 		return customerDao.update(user);
-
 	}
 
 	@Override

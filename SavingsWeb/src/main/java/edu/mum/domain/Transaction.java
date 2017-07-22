@@ -47,7 +47,6 @@ public class Transaction implements Serializable {
 	private Long id = null;
 
 	@NotNull
-	//@EmptyOrSize(min = 1, max = 999999, message = "{EmptyOrSize}")
 	@Min(1)
 	@Column(name = "AMOUNT")
 	private BigDecimal amount;

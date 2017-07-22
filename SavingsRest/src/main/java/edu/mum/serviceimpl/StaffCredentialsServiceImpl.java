@@ -25,9 +25,7 @@ public class StaffCredentialsServiceImpl implements edu.mum.service.StaffCredent
 	}
 
 	public StaffCredentials findByUserName(String userName) {
-		System.out.println("findOne: 4");
 		return staffCredentialsDao.findByUserName(userName);
-
 	}
 
 	@Override

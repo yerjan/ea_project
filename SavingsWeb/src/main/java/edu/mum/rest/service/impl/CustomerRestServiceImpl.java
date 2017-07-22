@@ -30,11 +30,4 @@ public class CustomerRestServiceImpl implements CustomerRestService {
  		return (restTemplate.exchange("http://localhost:8080/SavingsRest/customers/"+ index, HttpMethod.GET, remoteApi.getHttpEntity(), Customer.class).getBody());
 	}
 
-//	public Customer save(Customer member) {
-//		RestTemplate restTemplate = remoteApi.getRestTemplate();
-//		HttpEntity<Customer> httpEntity = new HttpEntity<Customer>(member, remoteApi.getHttpHeaders());
-//		restTemplate.postForObject("http://localhost:8080/Lab_12_RestService/users/add/", httpEntity, Customer.class);
-//		return null;
-//	}
-
 }

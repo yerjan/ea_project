@@ -42,16 +42,6 @@ public class SavingsServiceImpl implements SavingsService {
 
 	public Savings processWithdraw(Transaction tran) {
 		return savingRestService.processWithdraw(tran);
-
-	}
-
-	public Savings processOpen(Long accountId) {
-		return savingRestService.processOpen(accountId);
-	}
-
-	public Savings processClose(Long accountId) {
-		return savingRestService.processClose(accountId);
-
 	}
 
 	public Savings addSavings(Savings savings) {

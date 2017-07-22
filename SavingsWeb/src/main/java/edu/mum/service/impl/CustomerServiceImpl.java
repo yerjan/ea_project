@@ -16,21 +16,6 @@ public class CustomerServiceImpl implements edu.mum.service.CustomerService {
 	
 	@Autowired
 	private CustomerRestService customerRestService;
-
- 	@Autowired
-	private UserCredentialsService credentialsService;
-
-// 	
-//     public void save( Customer user) {  		
-//  		userRestService.save(user);
-// 	}
-//  	
-//    @Override
-//    public void saveFull( Customer user) {  		
-//   		//credentialsService.save(user.getUserCredentials());
-//   		userRestService.save(user);
-// 	}
-   	
 	
 	public List<Customer> findAll() {
 		return (List<Customer>)customerRestService.findAll();
@@ -38,19 +23,7 @@ public class CustomerServiceImpl implements edu.mum.service.CustomerService {
 
  	@Override
 	public Customer findOne(Long id) {
-		 
 		return customerRestService.findOne(id);
 	}
-
-	@Override
-	public List<Customer> findCustemers(int startIndex, int size) {
-    // implement it in rest service
-		//from all it is not recommended 
-	List<Customer> allCustemers = findAll();
-	
-	return  allCustemers.subList(startIndex, (startIndex + 1 )*size);
-		
-	}
- 
 
 }

@@ -45,16 +45,5 @@ public class CustomerController {
 		model.addAttribute("savings", savings);
  		return "customer";
 	}
-// pagination 
-  	
-@RequestMapping("/{startIndex}-{size}")
-	public String findCustemers(@PathVariable("startIndex") int startIndex,@PathVariable("size") int size, Model model) {
-
-	List<Customer> customers = customerService.findCustemers(startIndex, size);
-	
-       model.addAttribute("customer", customers);
-	
-	return "customers";
-	}
 
 }

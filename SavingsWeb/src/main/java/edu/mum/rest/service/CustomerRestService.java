@@ -12,7 +12,4 @@ public interface CustomerRestService {
  	public List<Customer> findAll();
 
 	public Customer findOne(Long index);
-
-	//public Customer save(Customer member);
-
 }

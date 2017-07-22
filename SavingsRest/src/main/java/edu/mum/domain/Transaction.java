@@ -1,6 +1,5 @@
 package edu.mum.domain;
 
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -26,7 +25,6 @@ import java.util.Date;
 @Table(name = "TRANSACTION")
 public class Transaction implements Serializable {
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "TRAN_ID")
@@ -34,10 +32,10 @@ public class Transaction implements Serializable {
 
 	@Column(name = "AMOUNT")
 	private BigDecimal amount;
-	
-	//@JsonIgnore
+
+	// @JsonIgnore
 	@JsonBackReference
-	//@JsonManagedReference
+	// @JsonManagedReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ACCOUNT_ID")
 	private Savings savings;
@@ -50,7 +48,7 @@ public class Transaction implements Serializable {
 
 	@Column(name = "DESCRIPTION", nullable = false)
 	private String description;
-	
+
 	@Temporal(TemporalType.DATE)
 	@Column(name = "TRAN_DATE", nullable = false)
 	private Date tranDate;

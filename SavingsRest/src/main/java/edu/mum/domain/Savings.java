@@ -26,9 +26,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "SAVINGS")
 public class Savings implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -105,12 +102,12 @@ public class Savings implements Serializable {
 	private Long customerId;
 
 	@JsonIgnore
-	//@JsonBackReference
+	// @JsonBackReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "savings")
 	private Set<Balance> balances = new HashSet<Balance>();
 
 	@JsonIgnore
-	//@JsonBackReference
+	// @JsonBackReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "savings")
 	private Set<Transaction> transactions = new HashSet<Transaction>();
 

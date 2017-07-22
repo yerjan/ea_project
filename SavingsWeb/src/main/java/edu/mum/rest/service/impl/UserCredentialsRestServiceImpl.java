@@ -36,8 +36,6 @@ public class UserCredentialsRestServiceImpl implements UserCredentialsRestServic
 			System.out.println(e.getMessage());
 
 		}
-		
-		System.out.println("findOne: 1");
 
 		return userCredentials;
 	}

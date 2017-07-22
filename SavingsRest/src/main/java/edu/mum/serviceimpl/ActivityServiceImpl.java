@@ -14,8 +14,8 @@ public class ActivityServiceImpl implements ActivityService {
 
 	@Autowired
 	private ActivityDao activityDao;
-	
-	public void save(Activity activity){
+
+	public void save(Activity activity) {
 		activityDao.save(activity);
 	}
 }

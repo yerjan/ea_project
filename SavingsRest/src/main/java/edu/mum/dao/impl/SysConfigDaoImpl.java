@@ -1,4 +1,4 @@
-  package edu.mum.dao.impl;
+package edu.mum.dao.impl;
 
 import javax.persistence.Query;
 

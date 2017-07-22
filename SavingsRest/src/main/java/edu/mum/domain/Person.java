@@ -76,8 +76,8 @@ public class Person implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
-	public String getFullName(){
+
+	public String getFullName() {
 		return this.firstName + " " + this.lastName;
 	}
 

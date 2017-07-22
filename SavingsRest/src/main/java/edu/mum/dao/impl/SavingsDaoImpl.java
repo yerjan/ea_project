@@ -21,8 +21,8 @@ public class SavingsDaoImpl extends GenericDaoImpl<Savings> implements SavingsDa
 	public Savings findByCurrency(String currency) {
 
 		Query query = entityManager.createQuery("select u from Savings u  where u.currency =:currency");
-		return (Savings) query.setParameter("currency", currency).getSingleResult();
 
+		return (Savings) query.setParameter("currency", currency).getSingleResult();
 	}
 
 	@Override

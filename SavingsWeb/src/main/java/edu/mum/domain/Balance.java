@@ -100,10 +100,4 @@ public class Balance implements Serializable {
 		this.savings = savings;
 	}
 
-	// ********************** Accessor Methods ********************** //
-
-	// ********************** Common Methods ********************** //
-
-	// ********************** Business Methods ********************** //
-
 }

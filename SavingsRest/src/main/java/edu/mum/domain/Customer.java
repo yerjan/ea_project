@@ -5,7 +5,7 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;	
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,10 +15,9 @@ public class Customer extends Person implements Serializable {
 
 	@Column
 	private String status;
-	
+
 	@Column
 	private int creditScore;
-
 
 	public String getStatus() {
 		return status;
@@ -36,5 +35,4 @@ public class Customer extends Person implements Serializable {
 		this.creditScore = creditScore;
 	}
 
-	
 }

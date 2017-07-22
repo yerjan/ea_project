@@ -29,7 +29,6 @@ public class CustomerController {
 
 	@RequestMapping("/{id}")
 	public Customer getUserById(@PathVariable("id") Long id) {
-		System.out.println("customer ID: " + id);
 		return customerService.findOne(id);
 	}
 

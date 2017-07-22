@@ -10,29 +10,21 @@ import edu.mum.domain.StaffCredentials;
 import edu.mum.service.StaffCredentialsService;
 
 @RestController
-@RequestMapping({"/staffCredentials"})
- public class StaffCredentialsController {
+@RequestMapping({ "/staffCredentials" })
+public class StaffCredentialsController {
 
 	@Autowired
 	StaffCredentialsService credentialsService;
-	
- 	
- 	@RequestMapping("/add")
-	public void addOne(@RequestBody StaffCredentials staffCredentials ) {
 
+	@RequestMapping("/add")
+	public void addOne(@RequestBody StaffCredentials staffCredentials) {
 		credentialsService.save(staffCredentials);
- 
- 		return  ;
 	}
- 
- 	@RequestMapping("/{id}")
-	public StaffCredentials findOne(@PathVariable("id") String userName ) {
- 		System.out.println("findOne: 2");
- 		System.out.println("findOne: 2 userName: " + userName);
+
+	@RequestMapping("/{id}")
+	public StaffCredentials findOne(@PathVariable("id") String userName) {
 		StaffCredentials validCredentials = credentialsService.findByUserName(userName);
-		System.out.println("findOne: 3");
- 		return  validCredentials;
+		return validCredentials;
 	}
- 
- 
+
 }

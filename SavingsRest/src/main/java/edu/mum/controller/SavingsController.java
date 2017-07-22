@@ -38,11 +38,7 @@ public class SavingsController {
 
 	@RequestMapping
 	public List<Savings> listSavings(Model model, @RequestParam(value = "customerId", required = false) Long id) {
-		if (id != null) {
-			return savingsService.findByCustomer(id);
-		} else {
-			return savingsService.findAll();
-		}
+		return savingsService.findByCustomer(id);
 	}
 
 	@RequestMapping("/{id}")
@@ -58,7 +54,6 @@ public class SavingsController {
 		} catch (Exception up) {
 			System.out.println("processAddNewSavingsForm Failed!!!");
 			System.out.println("processAddNewSavingsForm: " + up.getMessage());
-
 		}
 
 		return null;
@@ -71,9 +66,7 @@ public class SavingsController {
 		try {
 			t = savingsService.incrementBalance(tran);
 			Customer customer = customerService.findOne(t.getSavings().getCustomerId());
-
 			messageService.publish(customerMessageTemplate, t, customer.getFullName());
-			return t;
 		} catch (Exception up) {
 			System.out.println("Income transaction Failed!!!");
 			System.out.println("processIncome: " + up.getMessage());
@@ -88,9 +81,8 @@ public class SavingsController {
 		try {
 			t = savingsService.decrementBalance(tran);
 			Customer customer = customerService.findOne(t.getSavings().getCustomerId());
-
 			messageService.publish(customerMessageTemplate, t, customer.getFullName());
-			return t;
+
 		} catch (Exception up) {
 			System.out.println("Withdraw transaction Failed!!!");
 			System.out.println("processWithdraw: " + up.getMessage());
@@ -100,16 +92,12 @@ public class SavingsController {
 
 	@RequestMapping(value = "/transaction")
 	public List<Transaction> listTranByAccount(Model model, @RequestParam(value = "accountId") Long id) {
-
 		return savingsService.listTransaction(id);
-
 	}
 
 	@RequestMapping(value = "/balance")
 	public Balance getActiveBalance(Model model, @RequestParam(value = "accountId") Long id) {
-
 		return savingsService.getActiveBalance(id);
-
 	}
 
 }

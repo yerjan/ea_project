@@ -36,17 +36,9 @@ public class LoginController {
 		return "redirect:/customers";
 	}
 
-	@RequestMapping(value = "/loginfailed", method = RequestMethod.GET)
-	public String loginerror(Model model) {
-
-		model.addAttribute("error", "true");
-		return "login";
-
-	}
-
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(Model model, SessionStatus status) {
 		status.setComplete();
-		return "redirect:/welcome";
+		return "redirect:/login";
 	}
 }
