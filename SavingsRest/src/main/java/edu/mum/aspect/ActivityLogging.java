@@ -1,80 +1,66 @@
 package edu.mum.aspect;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import edu.mum.domain.Activity;
 import edu.mum.domain.Transaction;
+import edu.mum.service.ActivityService;
 
 @Aspect
 @Component
 public class ActivityLogging {
-	// @Autowired
-	// private ActivityService activityService;
-
-	// @Pointcut("execution(*
-	// edu.mum.service.SavingsService.createSavings(..))")
-	// public void createSavings(){}
-	//
-	// @Pointcut("execution(*
-	// edu.mum.service.SavingsService.incrementBalance(..))")
-	// public void incrementBalance(){}
-
-	// @Pointcut("within(edu.mum.serviceimpl..*)")
-	// public void decrementBalance(){}
-
-	// @Pointcut("execution(* edu.mum.serviceimpl.*(tran))")
-	// public void decrement(){}
-
-	// @Before("decrement(Transaction)")
-	// @Before("execution(* edu.mum..*(..))")
-	// @Before("execution(* edu.mum.serviceimpl..*(..)) && args(Object)")
-	@Before("execution(* edu.mum.serviceimpl.SavingsServiceImpl..*(..)) && args(tran)")
-	// @Before("execution(public * *(..))")
-	public void something(JoinPoint joinPoint, Object tran) {
-		if (joinPoint.getSignature().toString().contains("incrementBalance")) {
-			System.out.println("FOUND IT:::::::::::::::: LOL");
-			Transaction transaction = (Transaction) tran;
+	 @Autowired
+	 private ActivityService activityService;
+	 
+	@Before("execution(* edu.mum.serviceimpl.SavingsServiceImpl.incrementBalance(..)) && args(tran)")
+	public void logIncome(JoinPoint joinPoint, Object tran) {
+		Transaction transaction = (Transaction) tran;
 			
-			System.out.println(transaction.getDescription());
-		}
-		System.out.println(">>>>>>>>>>>>>WHY IS IT NOT WORKING. COME OON!!!" + joinPoint.getSignature());
+		System.out.println(transaction.getDescription());
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		
+		Activity activity = new Activity();
+		activity.setEvent("Account income");
+		activity.setUser(transaction.getSavings().getCustomerId());
+		
+		activity.setData("Account ID: \"" + transaction.getSavings().getId()
+					   + "\", Amount: \"" + transaction.getAmount()
+					   + "\", Description: \"" + transaction.getDescription()
+					   + "\", Date: \"" + dateFormat.format(date));
+		
+		activityService.save(activity);
+		
 	}
-	//
-	// @Before("incrementBalance()")
-	// public void save(Transaction transaction){
-	// System.out.println(">>>>>>>>>>>>>>>>>>>>> ASPECT!
-	// >>>>>>>>>>>>>>>>>>>>>>>");
-	//// Activity activity = new Activity();
-	//// activity.setUser((long) 1);
-	//// activity.setEvent("Withdraw balance");
-	// //activity.setData("Type: " + transaction.getType() + ", Amount: " +
-	// transaction.getAmount());
-	//
-	// //System.out.println("Type: " + transaction.getType() + ", Amount: " +
-	// transaction.getAmount());
-	//
-	// //activityService.save(activity);
-	// }
+	
+	@Before("execution(* edu.mum.serviceimpl.SavingsServiceImpl.decrementBalance(..)) && args(tran)")
+	public void logWithdraw(JoinPoint joinPoint, Object tran) {
+		Transaction transaction = (Transaction) tran;
+			
+		System.out.println(transaction.getDescription());
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Date date = new Date();
+		
+		Activity activity = new Activity();
+		activity.setEvent("Account Withdraw");
+		activity.setUser(transaction.getSavings().getCustomerId());
+		
+		activity.setData("Account ID: \"" + transaction.getSavings().getId()
+				   + "\", Amount: \"" + transaction.getAmount()
+				   + "\", Description: \"" + transaction.getDescription()
+				   + "\", Date: \"" + dateFormat.format(date));
+	
+		activityService.save(activity);
+	}
 
-	// @Before()
-	// public void update(Savings user){
-	// Activity act= new Activity();
-	// ActivityDao dao = new ActivityDaoImp();
-	// act.setEvent("Savng Account Updated");
-	// act.setDatetime(new Date());
-	// //act.setUser(null);
-	// dao.addActivity(act);
-	// }
-	//
-	// @Before("execution(* edu.mum.service.SavingsService.openSavings(..))")
-	// public void incrementBalance(Transaction tran){
-	// Activity act= new Activity();
-	// ActivityDao dao = new ActivityDaoImp();
-	// act.setEvent("Savng Account Incremented");
-	// act.setDatetime(new Date());
-	// //act.setUser(null);s
-	// dao.addActivity(act);
-	// }
 }
