@@ -18,7 +18,7 @@ public class BatchTest {
 	public SavingsService savingService;
 	
 	// This function demonstrates batch processing at every 10 seconds
-	@Scheduled(cron="*/10 * * * * *")
+	//@Scheduled(cron="*/10 * * * * *")
 	public void testing(){
 		System.out.println("*** This print demonstrates BATCH PROCESSING at every 10 seconds ***");
 	}
