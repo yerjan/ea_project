@@ -1,48 +1,81 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"  %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"  %>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<link rel="stylesheet"	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-<title>Products</title>
+	<link rel="stylesheet"	href="<spring:url value="/resource/bootstrap-3.3.7-dist/css/bootstrap.min.css"  htmlEscape="true" />">
+<title>Customer List</title>
 </head>
 <body>
-	<section>
-		<div class="jumbotron">
-			<div class="container">
-				<h1>Welcome Kimosabe!! </h1>
+	
+	<div class="container">
+		<div class='login-container'>
+			<div class='login-title'>
+				Login
 			</div>
-		</div>
-	</section>
-<div class="container">
-    <div class="row">
-		<div class="col-md-4 col-md-offset-4">
-    		<div class="panel panel-default">
-			  	<div class="panel-heading">
-			    	<h3 class="panel-title">Please sign in</h3>
-			 	</div>
-			  	<div class="panel-body">
-			  	<c:if test="${not empty error}">
+			<c:if test="${not empty error}">
 					<div class="alert alert-danger">
 						<spring:message code="AbstractUserDetailsAuthenticationProvider.badCredentials"/><br />
 					</div>
 				</c:if>
-			    	<form action="<spring:url value="/postLogin"></spring:url>" method="post">
-  					<sec:csrfInput />
-                    <fieldset>
-			    	  	<div class="form-group">
-			    		    <input class="form:input-large" placeholder="User Name" name='userName' type="text">
-			    		</div>
-			    		<div class="form-group">
-			    			<input class=" form:input-large" placeholder="Password" name='password'  type="password" value="">
-			    		</div>
-			    		<input class="btn btn-lg btn-success btn-mini" type="submit" value="Login">
-			    	</fieldset>
-			      	</form>
+			<form class="form-horizontal" action="<spring:url value="/postLogin"></spring:url>" method="post">
+			  <sec:csrfInput />
+			  <div class="form-group">
+			    <div>
+			      <input type="text" class="form-control" id="username" name='userName' placeholder="Username">
 			    </div>
-			</div>
+			  </div>
+			  <div class="form-group">
+			    <div>
+			      <input type="password" class="form-control" id="password" name='password'  placeholder="Password">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <div class="col-sm-offset-2 col-sm-10">
+			      <div class="checkbox">
+			        <label>
+			          <input type="checkbox"> Remember me
+			        </label>
+			      </div>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <div class="col-sm-offset-2 col-sm-10">
+			      <button type="submit" class="btn btn-default">Sign in</button>
+			    </div>
+			  </div>
+			</form>
 		</div>
 	</div>
-</div>
+
+	<style type="text/css">
+		.container{
+			width: 100%;
+			height: 100%;
+			background-repeat: no-repeat;
+			background-image: url("<spring:url value="/resource/images/piggy.png"  htmlEscape="true" />");
+			position: relative;
+		}
+
+		.login-container{
+			position: absolute;
+			top: 200px;
+			left: 200px;
+			width: 300px;
+			height: 500px;
+			padding: 50px;
+			background-color: rgba(255, 255, 255, 0.5);
+
+			border-radius: 10px;
+		}
+
+		.login-title{
+			font-size: 30px;
+			text-align: center;
+			margin-bottom: 30px;
+		}
+	</style>
 </body>
+</html>

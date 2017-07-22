@@ -17,36 +17,36 @@ public class LoginController {
 
 	@Autowired
 	UserCredentialsService credentialsService;
-	
-	@RequestMapping(value="/login", method = RequestMethod.GET)
-	public String login() {
- 		return "login";
-	}
- 
-	
-	@RequestMapping(value="/postLogin", method = RequestMethod.POST)
-	public String PostLogin(StaffCredentials credentials, Model model) {
 
-		StaffCredentials validCredentials = credentialsService.findOne(credentials.getUserName());
-		  
-		if (validCredentials == null)
-			return  "login";
- 
-		model.addAttribute("user", validCredentials.getUser());
- 		return "redirect:/welcome";
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login() {
+		return "login";
 	}
- 
-	@RequestMapping(value="/loginfailed", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/postLogin", method = RequestMethod.POST)
+	public String PostLogin(StaffCredentials credentials, Model model) {
+		System.out.println("PostLogin");
+		StaffCredentials validCredentials = credentialsService.findOne(credentials.getUserName());
+		System.out.println("PostLogin1");
+		if (validCredentials == null)
+			return "login";
+
+		System.out.println("PostLogin2");
+		model.addAttribute("user", validCredentials.getUser());
+		return "redirect:/customers";
+	}
+
+	@RequestMapping(value = "/loginfailed", method = RequestMethod.GET)
 	public String loginerror(Model model) {
- 
+
 		model.addAttribute("error", "true");
 		return "login";
- 
+
 	}
- 
-	@RequestMapping(value="/logout", method = RequestMethod.GET)
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(Model model, SessionStatus status) {
 		status.setComplete();
- 		return "redirect:/welcome";
- 	}
+		return "redirect:/welcome";
+	}
 }

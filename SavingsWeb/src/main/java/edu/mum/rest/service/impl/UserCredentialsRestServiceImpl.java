@@ -30,7 +30,7 @@ public class UserCredentialsRestServiceImpl implements UserCredentialsRestServic
 		RestTemplate restTemplate = remoteApi.getRestTemplate();
 		StaffCredentials userCredentials = null;
 		try {
-			userCredentials = (restTemplate.exchange("http://localhost:8080/SavingsRest/userCredentials/" + index,
+			userCredentials = (restTemplate.exchange("http://localhost:8080/SavingsRest/staffCredentials/" + index,
 					HttpMethod.GET, remoteApi.getHttpEntity(), StaffCredentials.class).getBody());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
