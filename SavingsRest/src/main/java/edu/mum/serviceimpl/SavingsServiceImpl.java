@@ -1,6 +1,7 @@
 package edu.mum.serviceimpl;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -185,6 +186,32 @@ public class SavingsServiceImpl implements SavingsService {
 
 		Balance s = balanceDao.findActiveBalance(id);
 		return s;
+	}
+
+	@Override
+	public void endOfDayCalculation() {
+		// First we increment day
+		SysConfig sysConfig = sysConfigDao.getSysConfig();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(sysConfig.getSysDate());
+		cal.add(Calendar.DATE, 1);
+		sysConfig.setSysDate(cal.getTime());
+
+		// assuming interest is calculated
+		BigDecimal interest = new BigDecimal(10);
+		
+		List<Savings> list = savingsDao.findAll();
+		for(Savings savings : list){
+			Transaction transaction = new Transaction();
+			transaction.setAmount(interest);
+			transaction.setCurrency(savings.getCurrency());
+			transaction.setDescription("INTEREST");
+			transaction.setType("INCOME");
+			transaction.setSavings(savings);
+			
+			incrementBalance(transaction);
+		}
+		
 	}
 
 }

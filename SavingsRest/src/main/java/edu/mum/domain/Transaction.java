@@ -26,13 +26,6 @@ import java.util.Date;
 @Table(name = "TRANSACTION")
 public class Transaction implements Serializable {
 
-	public Date getTranDate() {
-		return tranDate;
-	}
-
-	public void setTranDate(Date tranDate) {
-		this.tranDate = tranDate;
-	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -116,4 +109,11 @@ public class Transaction implements Serializable {
 		this.savings = savings;
 	}
 
+	public Date getTranDate() {
+		return tranDate;
+	}
+
+	public void setTranDate(Date tranDate) {
+		this.tranDate = tranDate;
+	}
 }

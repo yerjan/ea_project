@@ -27,4 +27,6 @@ public interface SavingsService {
 	public List<Transaction> listTransaction(Long id);
 
 	public Balance getActiveBalance(Long id);
+	
+	public void endOfDayCalculation();
 }
