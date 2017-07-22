@@ -11,6 +11,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -39,6 +40,7 @@ public class Transaction implements Serializable {
 	@Column(name = "TRAN_ID")
 	private Long id = null;
 
+	@NotNull
 	@Column(name = "AMOUNT")
 	private BigDecimal amount;
 	
@@ -55,6 +57,7 @@ public class Transaction implements Serializable {
 	@Column(name = "TYPE", nullable = false)
 	private String type;
 
+	@NotNull
 	@Column(name = "DESCRIPTION", nullable = false)
 	private String description;
 	

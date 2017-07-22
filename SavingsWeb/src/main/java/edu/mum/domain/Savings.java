@@ -18,9 +18,15 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import edu.mum.validation.EmptyOrSize;
 
 @Entity
 @Table(name = "SAVINGS")
@@ -36,21 +42,48 @@ public class Savings implements Serializable {
 	@Column(name = "ACCOUNT_ID")
 	private Long id = null;
 
+	@EmptyOrSize(min = 4, max = 19, message = "{EmptyOrSize}")
 	@Column(name = "NAME", nullable = false)
 	private String name;
 
 	@Column(name = "STATUS", nullable = false)
 	private String status = "NEW";
 
+	@NotEmpty
 	@Column(name = "CURRENCY", nullable = false)
 	private String currency;
 
+	@NotNull
 	@Column(name = "INTEREST_RATE", nullable = false)
 	private Double interestRate;
 
-	@Temporal(TemporalType.DATE)
+	@NotNull
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "START_DATE", nullable = false)
 	private Date startDate;
+
+	@Future
+
+	@NotNull
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Column(name = "END_DATE", nullable = false)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date endDate;
+
+	@NotNull
+	@Column(name = "CUSTOMER_ID", nullable = false)
+	private Long customerId;
+
+	// @JsonIgnore
+	// @JsonBackReference
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "savings")
+	private Set<Balance> balances = new HashSet<Balance>();
+
+	// @JsonIgnore
+	// @JsonBackReference
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "savings")
+	private Set<Transaction> transactions = new HashSet<Transaction>();
 
 	public Double getInterestRate() {
 		return interestRate;
@@ -95,23 +128,6 @@ public class Savings implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-
-	@Future
-	@Column(name = "END_DATE", nullable = false)
-	private Date endDate;
-
-	@Column(name = "CUSTOMER_ID", nullable = false)
-	private Long customerId;
-
-	//@JsonIgnore
-	//@JsonBackReference
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "savings")
-	private Set<Balance> balances = new HashSet<Balance>();
-
-	//@JsonIgnore
-	//@JsonBackReference
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, mappedBy = "savings")
-	private Set<Transaction> transactions = new HashSet<Transaction>();
 
 	public Long getId() {
 		return id;

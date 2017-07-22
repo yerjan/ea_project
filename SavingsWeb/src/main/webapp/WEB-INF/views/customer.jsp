@@ -9,29 +9,41 @@
 <title>Customer List</title>
 </head>
 <body>
-	
+
 	<div class="container">
 
 		<div class="subtitle">
 			Customer Information
-			<div>
-				<a href="#" class='btn btn-primary'>Add Account</a>
-				<a href="#" class='btn btn-primary'>button</a>
-			</div>
+			<div></div>
 		</div>
 		<div class='detail-container'>
 			<fieldset>
-				<div class='form-group'><label class='col-sm-4 control-label'>Name:</label> <div>${customer.firstName} ${customer.lastName} </div></div>
-				<div class='form-group'><label class='col-sm-4 control-label'>Email:</label> <div>${customer.email}</div></div>
-				<div class='form-group'><label class='col-sm-4 control-label'>Status:</label> <div>${customer.status}</div></div>
-				<div class='form-group'><label class='col-sm-4 control-label'>Credit Score:</label> <div>${customer.creditScore}</div></div>
+				<div class='form-group'>
+					<label class='col-sm-4 control-label'>Name:</label>
+					<div>${customer.firstName}${customer.lastName}</div>
+				</div>
+				<div class='form-group'>
+					<label class='col-sm-4 control-label'>Email:</label>
+					<div>${customer.email}</div>
+				</div>
+				<div class='form-group'>
+					<label class='col-sm-4 control-label'>Status:</label>
+					<div>${customer.status}</div>
+				</div>
+				<div class='form-group'>
+					<label class='col-sm-4 control-label'>Credit Score:</label>
+					<div>${customer.creditScore}</div>
+				</div>
 			</fieldset>
 		</div>
 
 		<div class="subtitle">
 			Saving Accounts
 			<div>
-				<a href="#" class='btn btn-primary'>Add New Account</a>
+
+				<a
+					href="<spring:url value="/savings/addSavings?customerId=${customer.id}"/>"
+					class='btn btn-primary'>Add New Account</a>
 			</div>
 		</div>
 
@@ -50,8 +62,9 @@
 			<tbody>
 				<c:forEach items="#{savings}" var="saving">
 					<tr>
-						<td>${saving.id}</td> 
-						<td><a href="<spring:url value="/savings/${saving.id}"/>">${saving.name}</a> </td>
+						<td>${saving.id}</td>
+						<td><a href="<spring:url value="/savings/${saving.id}"/>">${saving.name}</a>
+						</td>
 						<td>${saving.currency}</td>
 						<td>${saving.status}</td>
 						<td>${saving.interestRate}</td>
@@ -60,38 +73,43 @@
 
 					</tr>
 				</c:forEach>
-				
+
 			</tbody>
 		</table>
 	</div>
-	
+
 	<style type="text/css">
-		.subtitle{
-			margin-top: 20px;
-			font-size: 28px;
-			border-left: 4px solid orange;
-			padding-left: 5px;
-		}
-		.subtitle a{ margin-left: 10px; float: right;}
-		.subtitle div{float: right;}
+.subtitle {
+	margin-top: 20px;
+	font-size: 28px;
+	border-left: 4px solid orange;
+	padding-left: 5px;
+}
 
+.subtitle a {
+	margin-left: 10px;
+	float: right;
+}
 
-		.detail-container{
-			padding: 20px;
-			margin-top: 10px;
-			background-color: #eee;
-		}
+.subtitle div {
+	float: right;
+}
 
-		fieldset > .form-group{
-			width: 600px;
-			font-size: 18px;
-		}
+.detail-container {
+	padding: 20px;
+	margin-top: 10px;
+	background-color: #eee;
+}
 
-		fieldset .form-group > div{
-			color: #000066;
-			font-weight: bold;
-		}
+fieldset>.form-group {
+	width: 600px;
+	font-size: 18px;
+}
 
-	</style>
+fieldset .form-group>div {
+	color: #000066;
+	font-weight: bold;
+}
+</style>
 </body>
 </html>

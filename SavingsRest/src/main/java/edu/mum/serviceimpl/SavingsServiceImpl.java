@@ -128,7 +128,7 @@ public class SavingsServiceImpl implements SavingsService {
 			b1.setSavings(s);
 			b1.setStatus(0);
 			b1.setValueDate(sysConfig.getSysDate());
-			balanceDao.save(b);
+			balanceDao.save(b1);
 
 		} else {
 			if (sysConfig.getSysDate().compareTo(b.getValueDate()) != 0) {
@@ -140,7 +140,7 @@ public class SavingsServiceImpl implements SavingsService {
 				b1.setSavings(s);
 				b1.setStatus(0);
 				b1.setValueDate(sysConfig.getSysDate());
-				balanceDao.save(b);
+				balanceDao.save(b1);
 
 			} else {
 				b.setPrincipal(b.getPrincipal().subtract(tran.getAmount()));
@@ -160,6 +160,14 @@ public class SavingsServiceImpl implements SavingsService {
 	@Override
 	public Savings createSavings(Savings savings) {
 		savingsDao.save(savings);
+		SysConfig sysConfig = sysConfigDao.getSysConfig();
+		Balance b1 = new Balance();
+		b1.setInterest(new BigDecimal(0));
+		b1.setPrincipal(new BigDecimal(0));
+		b1.setSavings(savings);
+		b1.setStatus(0);
+		b1.setValueDate(sysConfig.getSysDate());
+		balanceDao.save(b1);
 		return savings;
 	}
 
