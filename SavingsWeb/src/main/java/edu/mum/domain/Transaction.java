@@ -11,11 +11,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import edu.mum.validation.EmptyOrSize;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -41,6 +47,8 @@ public class Transaction implements Serializable {
 	private Long id = null;
 
 	@NotNull
+	//@EmptyOrSize(min = 1, max = 999999, message = "{EmptyOrSize}")
+	@Min(1)
 	@Column(name = "AMOUNT")
 	private BigDecimal amount;
 	
@@ -57,7 +65,7 @@ public class Transaction implements Serializable {
 	@Column(name = "TYPE", nullable = false)
 	private String type;
 
-	@NotNull
+	@NotEmpty
 	@Column(name = "DESCRIPTION", nullable = false)
 	private String description;
 	
